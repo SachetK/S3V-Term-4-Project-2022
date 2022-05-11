@@ -16,9 +16,7 @@ public interface PersonDao {
 
     Optional<Person> selectPerson(int finder);
 
-    int deletePerson(int id);
+    int deletePerson(int finder);
 
-    int updatePersonByTicket(int ticket, Person person);
-
-    int updatePersonById(int id, Person person);
+    int updatePerson(int finder, Person person);
 }

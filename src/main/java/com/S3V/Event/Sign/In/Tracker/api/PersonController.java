@@ -29,11 +29,8 @@ public class PersonController {
 
     @GetMapping(path = "{finder}")
     public Person getPerson(@PathVariable("finder") int finder) {
-        return personService.getPersonById(finder)
-                .orElse(personService
-                        .getPersonByTicket(finder)
-                        .orElse(null)
-                );
+        return personService.getPerson(finder)
+                .orElse(null);
     }
 
     @DeleteMapping(path = "{finder}")
@@ -41,18 +38,8 @@ public class PersonController {
         personService.deletePerson(finder);
     }
 
-    @DeleteMapping(path = "{ticket}")
-    public void deletePersonByTicket(@PathVariable("ticket") int ticket){
-        personService.deletePersonByTicket(ticket);
-    }
-
-    @PutMapping(path = "{ticket}")
-    public void updatePersonByTicket(@PathVariable("ticket") int ticket, @RequestBody Person update){
-        personService.updatePersonByTicket(ticket, update);
-    }
-
-    @PutMapping(path = "{id}")
-    public void updatePerson(@PathVariable("id") int id, @RequestBody Person personToUpdate) {
-        personService.updatePerson(id, personToUpdate);
+    @PutMapping(path = "{finder}")
+    public void updatePerson(@PathVariable("finder") int finder, @RequestBody Person personToUpdate) {
+        personService.updatePerson(finder, personToUpdate);
     }
 }

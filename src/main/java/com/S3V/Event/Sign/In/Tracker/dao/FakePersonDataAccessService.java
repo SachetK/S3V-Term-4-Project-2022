@@ -1,6 +1,7 @@
 package com.S3V.Event.Sign.In.Tracker.dao;
 
 import com.S3V.Event.Sign.In.Tracker.model.Person;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -40,26 +41,12 @@ public class FakePersonDataAccessService implements PersonDao {
     }
 
     @Override
-    public int updatePersonByTicket(int ticket, Person update) {
-        return selectPerson(ticket)
+    public int updatePerson(int finder, Person update) {
+        return selectPerson(finder)
                 .map(person -> {
                     int indexOfPersonToUpdate = DB.indexOf(person);
                     if (indexOfPersonToUpdate >= 0) {
-                        DB.set(indexOfPersonToUpdate, new Person(update.getId(), update.getName(), ticket));
-                        return 1;
-                    }
-                    return 0;
-                })
-                .orElse(0);
-    }
-
-    @Override
-    public int updatePersonById(int id, Person update) {
-        return selectPerson(id)
-                .map(person -> {
-                    int indexOfPersonToUpdate = DB.indexOf(person);
-                    if (indexOfPersonToUpdate >= 0) {
-                        DB.set(indexOfPersonToUpdate, new Person(id, update.getName(), update.getTicketNumber()));
+                        DB.set(indexOfPersonToUpdate, new Person(update.getId(), update.getName(), update.getTicketNumber()));
                         return 1;
                     }
                     return 0;

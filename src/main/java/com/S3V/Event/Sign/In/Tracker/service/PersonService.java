@@ -26,27 +26,15 @@ public class PersonService {
         return personDao.selectAllPeople();
     }
 
-    public Optional<Person> getPersonById(int id) {
-        return personDao.selectPersonById(id);
+    public Optional<Person> getPerson(int finder) {
+        return personDao.selectPerson(finder);
     }
 
-    public Optional<Person> getPersonByTicket(int ticket){
-        return  personDao.selectPersonByTicket(ticket);
+    public int deletePerson(int finder) {
+        return personDao.deletePerson(finder);
     }
 
-    public int deletePerson(int id) {
-        return personDao.deletePersonById(id);
-    }
-
-    public int deletePersonByTicket(int ticket) {
-        return personDao.deletePersonByTicket(ticket);
-    }
-
-    public int updatePerson(int id, Person person) {
-        return personDao.updatePersonById(id, person);
-    }
-
-    public int updatePersonByTicket(int ticket, Person person) {
-        return personDao.updatePersonByTicket(ticket, person);
+    public int updatePerson(int finder, Person person) {
+        return personDao.updatePerson(finder, person);
     }
 }
