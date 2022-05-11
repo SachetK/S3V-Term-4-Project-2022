@@ -7,18 +7,25 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PersonDao {
-    int insertPerson(UUID id, Person person);
+    int insertPerson(int id, int ticketNumber, Person person);
 
     default int insertPerson(Person person) {
-        UUID id = UUID.randomUUID();
-        return insertPerson(id, person);
+        int id = (int) Math.random() * 4000;
+        int ticket = (int) Math.random() * 300;
+        return insertPerson(id, ticket, person);
     }
 
     List<Person> selectAllPeople();
 
-    Optional<Person> selectPersonById(UUID id);
+    Optional<Person> selectPersonById(int id);
 
-    int deletePersonById(UUID id);
+    Optional<Person> selectPersonByTicket(int ticket);
 
-    int updatePersonById(UUID id, Person person);
+    int deletePersonById(int id);
+
+    int deletePersonByTicket(int ticket);
+
+    int updatePersonByTicket(int ticket, Person person);
+
+    int updatePersonById(int id, Person person);
 }

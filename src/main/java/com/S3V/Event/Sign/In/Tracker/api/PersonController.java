@@ -29,18 +29,33 @@ public class PersonController {
     }
 
     @GetMapping(path = "{id}")
-    public Person getPersonById(@PathVariable("id") UUID id) {
+    public Person getPersonById(@PathVariable("id") int id) {
         return personService.getPersonById(id)
                 .orElse(null);
     }
 
+    @GetMapping(path = "{ticket}")
+    public Person getPersonByTicket(@PathVariable("ticket") int ticket){
+        return personService.getPersonByTicket(ticket).orElse(null);
+    }
+
     @DeleteMapping(path = "{id}")
-    public void deletePersonById(@PathVariable("id") UUID id) {
+    public void deletePersonById(@PathVariable("id") int id) {
         personService.deletePerson(id);
     }
 
+    @DeleteMapping(path = "{ticket}")
+    public void deletePersonByTicket(@PathVariable("ticket") int ticket){
+        personService.deletePersonByTicket(ticket);
+    }
+
+    @PutMapping(path = "{ticket}")
+    public void updatePersonByTicket(@PathVariable("ticket") int ticket, @RequestBody Person update){
+        personService.updatePersonByTicket(ticket, update);
+    }
+
     @PutMapping(path = "{id}")
-    public void updatePerson(@PathVariable("id") UUID id, @RequestBody Person personToUpdate) {
+    public void updatePerson(@PathVariable("id") int id, @RequestBody Person personToUpdate) {
         personService.updatePerson(id, personToUpdate);
     }
 }
