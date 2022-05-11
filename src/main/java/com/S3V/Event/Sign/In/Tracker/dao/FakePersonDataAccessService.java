@@ -23,32 +23,15 @@ public class FakePersonDataAccessService implements PersonDao {
     }
 
     @Override
-    public Optional<Person> selectPersonById(int id) {
+    public Optional<Person> selectPerson(int finder) {
         return DB.stream()
-                .filter(person -> person.getId() == id)
+                .filter(person -> person.getId() == finder || person.getTicketNumber() == finder)
                 .findFirst();
     }
 
     @Override
-    public Optional<Person> selectPersonByTicket(int ticket) {
-        return DB.stream()
-                .filter(person -> person.getTicketNumber() == ticket)
-                .findFirst();
-    }
-
-    @Override
-    public int deletePersonById(int id) {
-        Optional<Person> personMaybe = selectPersonById(id);
-        if (personMaybe.isEmpty()) {
-            return 0;
-        }
-        DB.remove(personMaybe.get());
-        return 1;
-    }
-
-    @Override
-    public int deletePersonByTicket(int ticket) {
-        Optional<Person> personMaybe = selectPersonByTicket(ticket);
+    public int deletePerson(int finder) {
+        Optional<Person> personMaybe = selectPerson(finder);
         if (personMaybe.isEmpty()) {
             return 0;
         }
@@ -58,7 +41,7 @@ public class FakePersonDataAccessService implements PersonDao {
 
     @Override
     public int updatePersonByTicket(int ticket, Person update) {
-        return selectPersonById(ticket)
+        return selectPerson(ticket)
                 .map(person -> {
                     int indexOfPersonToUpdate = DB.indexOf(person);
                     if (indexOfPersonToUpdate >= 0) {
@@ -72,7 +55,7 @@ public class FakePersonDataAccessService implements PersonDao {
 
     @Override
     public int updatePersonById(int id, Person update) {
-        return selectPersonById(id)
+        return selectPerson(id)
                 .map(person -> {
                     int indexOfPersonToUpdate = DB.indexOf(person);
                     if (indexOfPersonToUpdate >= 0) {

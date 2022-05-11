@@ -27,20 +27,18 @@ public class PersonController {
         return personService.getAllPeople();
     }
 
-    @GetMapping(path = "{id}")
-    public Person getPersonById(@PathVariable("id") int id) {
-        return personService.getPersonById(id)
-                .orElse(null);
+    @GetMapping(path = "{finder}")
+    public Person getPerson(@PathVariable("finder") int finder) {
+        return personService.getPersonById(finder)
+                .orElse(personService
+                        .getPersonByTicket(finder)
+                        .orElse(null)
+                );
     }
 
-    @GetMapping(path = "{ticket}")
-    public Person getPersonByTicket(@PathVariable("ticket") int ticket){
-        return personService.getPersonByTicket(ticket).orElse(null);
-    }
-
-    @DeleteMapping(path = "{id}")
-    public void deletePersonById(@PathVariable("id") int id) {
-        personService.deletePerson(id);
+    @DeleteMapping(path = "{finder}")
+    public void deletePerson(@PathVariable("finder") int finder) {
+        personService.deletePerson(finder);
     }
 
     @DeleteMapping(path = "{ticket}")

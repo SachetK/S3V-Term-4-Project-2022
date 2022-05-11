@@ -14,13 +14,9 @@ public interface PersonDao {
 
     List<Person> selectAllPeople();
 
-    Optional<Person> selectPersonById(int id);
+    Optional<Person> selectPerson(int finder);
 
-    Optional<Person> selectPersonByTicket(int ticket);
-
-    int deletePersonById(int id);
-
-    int deletePersonByTicket(int ticket);
+    int deletePerson(int id);
 
     int updatePersonByTicket(int ticket, Person person);
 
