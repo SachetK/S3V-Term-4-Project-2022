@@ -4,21 +4,19 @@ import com.S3V.Event.Sign.In.Tracker.model.Person;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 public interface PersonDao {
-    int insertPerson(UUID id, Person person);
+    int insertPerson(int id, int ticketNumber, Person person);
 
     default int insertPerson(Person person) {
-        UUID id = UUID.randomUUID();
-        return insertPerson(id, person);
+        return insertPerson(person.getId(), person.getTicketNumber(), person);
     }
 
     List<Person> selectAllPeople();
 
-    Optional<Person> selectPersonById(UUID id);
+    Optional<Person> selectPerson(int finder);
 
-    int deletePersonById(UUID id);
+    int deletePerson(int finder);
 
-    int updatePersonById(UUID id, Person person);
+    int updatePerson(int finder, Person person);
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RequestMapping("api/v1/person")
 @RestController
@@ -28,19 +27,19 @@ public class PersonController {
         return personService.getAllPeople();
     }
 
-    @GetMapping(path = "{id}")
-    public Person getPersonById(@PathVariable("id") UUID id) {
-        return personService.getPersonById(id)
+    @GetMapping(path = "{finder}")
+    public Person getPerson(@PathVariable("finder") int finder) {
+        return personService.getPerson(finder)
                 .orElse(null);
     }
 
-    @DeleteMapping(path = "{id}")
-    public void deletePersonById(@PathVariable("id") UUID id) {
-        personService.deletePerson(id);
+    @DeleteMapping(path = "{finder}")
+    public void deletePerson(@PathVariable("finder") int finder) {
+        personService.deletePerson(finder);
     }
 
-    @PutMapping(path = "{id}")
-    public void updatePerson(@PathVariable("id") UUID id, @RequestBody Person personToUpdate) {
-        personService.updatePerson(id, personToUpdate);
+    @PutMapping(path = "{finder}")
+    public void updatePerson(@PathVariable("finder") int finder, @RequestBody Person personToUpdate) {
+        personService.updatePerson(finder, personToUpdate);
     }
 }
