@@ -2,8 +2,6 @@ package com.S3V.Event.Sign.In.Tracker.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.UUID;
-
 public class Person {
     private final int id;
     private final int ticketNumber;
