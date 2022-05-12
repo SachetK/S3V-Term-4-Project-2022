@@ -3,8 +3,10 @@ package com.S3V.Event.Sign.In.Tracker.api;
 import com.S3V.Event.Sign.In.Tracker.model.Person;
 import com.S3V.Event.Sign.In.Tracker.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("api/v1/person")
@@ -18,7 +20,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public void addPerson(@RequestBody Person person) {
+    public void addPerson(@Valid @NonNull @RequestBody Person person) {
         personService.addPerson(person);
     }
 
@@ -39,7 +41,7 @@ public class PersonController {
     }
 
     @PutMapping(path = "{finder}")
-    public void updatePerson(@PathVariable("finder") int finder, @RequestBody Person personToUpdate) {
+    public void updatePerson(@PathVariable("finder") int finder, @Valid @NonNull @RequestBody Person personToUpdate) {
         personService.updatePerson(finder, personToUpdate);
     }
 }

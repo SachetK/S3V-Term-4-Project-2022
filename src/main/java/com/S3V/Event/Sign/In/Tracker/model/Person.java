@@ -2,9 +2,12 @@ package com.S3V.Event.Sign.In.Tracker.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotBlank;
+
 public class Person {
     private final int id;
     private final int ticketNumber;
+    @NotBlank
     private final String name;
 
     public Person(@JsonProperty("id") int id,
