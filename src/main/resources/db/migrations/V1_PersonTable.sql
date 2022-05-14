@@ -1,0 +1,5 @@
+CREATE TABLE person (
+    id INTEGER NOT NULL PRIMARY KEY
+    name VARCHAR(100)
+    ticket INTEGER NOT NULL
+)
