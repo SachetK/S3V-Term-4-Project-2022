@@ -1,4 +1,4 @@
-CREATE TABLE person (
+CREATE TABLE Person (
     id INTEGER NOT NULL PRIMARY KEY
     name VARCHAR(100)
     ticket INTEGER NOT NULL
