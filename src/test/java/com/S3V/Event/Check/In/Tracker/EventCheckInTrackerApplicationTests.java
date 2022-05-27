@@ -1,10 +1,10 @@
-package com.S3V.Event.Sign.In.Tracker;
+package com.S3V.Event.Check.In.Tracker;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EventSignInTrackerApplicationTests {
+class EventCheckInTrackerApplicationTests {
 
 	@Test
 	void contextLoads() {

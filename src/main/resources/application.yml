@@ -1,9 +1,0 @@
-#spring.datasource.url = jdbc:postgresql://localhost:5432/eventdb
-#spring.datasource.username = postgres
-#spring.password = password
-
-app:
-  datasource:
-    jdbc-url: jdbc:postgresql://localhost:5432/spring-boot-postgres
-    username: postgres
-    password: password
