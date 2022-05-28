@@ -98,4 +98,44 @@ public class Student {
     public String getPaymentMethod() {
         return paymentMethod;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setTicket(int ticket) {
+        this.ticket = ticket;
+    }
+
+    public void setCountyId(Integer countyId) {
+        this.countyId = countyId;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setMiddleInitial(String middleInitial) {
+        this.middleInitial = middleInitial;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public void setGuest(char guest) {
+        this.guest = guest;
+    }
+
+    public void setGuestTicket(Integer guestTicket) {
+        this.guestTicket = guestTicket;
+    }
 }
