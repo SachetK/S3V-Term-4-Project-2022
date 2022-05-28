@@ -19,14 +19,20 @@ class ListPersonComponent extends Component {
     render() {
         return (
             <div>
-                <h2 className = "text-center" style={{ color: "white"}}> Person List </h2>
+                <h2 className = "text-center" style={{ color: "white"}}> Student List </h2>
                 <div className = "row" style={{ color: "white"}}>
                     <table className = "table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th> Person Name</th>
-                                <th> Person MCPS ID</th>
-                                <th> Person Ticket Number</th>
+                                <th> Student Ticket Number</th>
+                                <th> MCPS ID</th>
+                                <th> Student Last Name</th>
+                                <th> Student Middle Initial</th>
+                                <th> Student First Name</th>
+                                <th> Grade</th>
+                                <th> Payment Method</th>
+                                <th> Guest YN</th>
+                                <th> Guest Ticket Number</th>
                                 <th> Actions</th>
                             </tr>
                         </thead>
@@ -36,9 +42,15 @@ class ListPersonComponent extends Component {
                                 this.state.people.map(
                                     person =>
                                     <tr key = {person.id}>
-                                        <td> {person.name} </td>
-                                        <td> {person.countyId} </td>
                                         <td> {person.ticket} </td>
+                                        <td> {person.countyId} </td>
+                                        <td> {person.lastName} </td>
+                                        <td> {person.middleInitial} </td>
+                                        <td> {person.firstName} </td>
+                                        <td> {person.grade} </td>
+                                        <td> {person.paymentMethod} </td>
+                                        <td> {person.guest} </td>
+                                        <td> {person.guestTicket} </td>                                        
                                     </tr>
                                 )
                             }

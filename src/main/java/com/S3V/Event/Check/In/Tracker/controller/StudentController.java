@@ -1,24 +1,26 @@
 package com.S3V.Event.Check.In.Tracker.controller;
 
-import com.S3V.Event.Check.In.Tracker.model.Person;
-import com.S3V.Event.Check.In.Tracker.repository.PersonRepository;
+import com.S3V.Event.Check.In.Tracker.model.Student;
+import com.S3V.Event.Check.In.Tracker.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/")
-public class PersonController {
+public class StudentController {
 
     @Autowired
-    private PersonRepository personRepository;
+    private StudentRepository studentRepository;
 
     // get all people
     @GetMapping("/people")
-    public List<Person> getAllPeople(){
-        return personRepository.findAll();
+    public List<Student> getAllPeople(){
+        return studentRepository.findAll();
     }
 }
