@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PersonService from '../services/PersonService';
 
 class ListPersonComponent extends Component {
     constructor(props) {
@@ -9,6 +10,12 @@ class ListPersonComponent extends Component {
         }
     }
     
+    componentDidMount() {
+        PersonService.getPeople().then((res) => {
+            this.setState({people: res.data});
+        });
+    }
+
     render() {
         return (
             <div>
