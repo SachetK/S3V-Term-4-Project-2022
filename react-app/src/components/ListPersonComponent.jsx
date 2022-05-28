@@ -31,7 +31,8 @@ class ListPersonComponent extends Component {
 
                         <tbody>
                             {
-                                this.state.person.map(person => 
+                                this.state.person.map(
+                                    person => 
                                     <tr key = {person.id}>
                                         <td> {person.name}</td>
                                         <td> {person.countyId}</td>
