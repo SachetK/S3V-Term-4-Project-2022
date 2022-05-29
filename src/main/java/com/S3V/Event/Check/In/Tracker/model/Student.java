@@ -37,7 +37,7 @@ public class Student {
 
     @Column(name = "guest_YN")
     @NotNull
-    private char guest;
+    private String guest;
 
     @Column(name = "guest_ticket")
     private Integer guestTicket;
@@ -46,7 +46,7 @@ public class Student {
 
     }
 
-    public Student(long id, Integer countyId, Integer guestTicket, String firstName, String lastName, String middleInitial, int ticket, Integer grade, String paymentMethod, char guest) {
+    public Student(long id, Integer countyId, Integer guestTicket, String firstName, String lastName, String middleInitial, int ticket, Integer grade, String paymentMethod, String guest) {
         this.id = id;
         this.countyId = countyId;
         this.guestTicket = guestTicket;
@@ -71,7 +71,7 @@ public class Student {
         return ticket;
     }
 
-    public char getGuest() {
+    public String getGuest() {
         return guest;
     }
 
@@ -131,7 +131,7 @@ public class Student {
         this.paymentMethod = paymentMethod;
     }
 
-    public void setGuest(char guest) {
+    public void setGuest(String guest) {
         this.guest = guest;
     }
 
