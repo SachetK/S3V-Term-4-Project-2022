@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/v1/")
 public class StudentController {
     @Autowired
-    CSVService fileService;
+    private CSVService fileService;
 
     @Autowired
     private StudentRepository studentRepository;
@@ -36,10 +36,10 @@ public class StudentController {
         if (CSVHelper.hasCSVFormat(file)) {
             try {
                 fileService.save(file);
-
                 message = "Uploaded the file successfully: " + file.getOriginalFilename();
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 message = "Could not upload the file: " + file.getOriginalFilename() + "!";
                 return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
             }

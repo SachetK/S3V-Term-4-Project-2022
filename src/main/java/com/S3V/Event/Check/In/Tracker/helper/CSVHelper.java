@@ -16,36 +16,34 @@ import java.util.List;
 
 public class CSVHelper {
     public static String TYPE = "text/csv";
-    static String[] HEADERS = { "Id", "Title", "Description", "Published" };
+    static String[] HEADERS = { "ID", "Guest Ticket Number", "FIRST", "LAST", "MI", "Ticket", "GR", "Payment Method", "Guest YN" };
     public static boolean hasCSVFormat(MultipartFile file) {
-        if (!TYPE.equals(file.getContentType())) {
-            return false;
-        }
-        return true;
+        return TYPE.equals(file.getContentType());
     }
     public static List<Student> csvToStudents(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,
-                     CSVFormat.DEFAULT.withHeader(HEADERS).withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
+                     CSVFormat.EXCEL.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim())) {
             List<Student> students = new ArrayList<>();
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+            Long id = 1L;
             for (CSVRecord csvRecord : csvRecords) {
-                Long id = 1L;
                 Student tutorial = new Student(
                         id,
-                        Integer.parseInt(csvRecord.get("countyId")),
-                        Integer.parseInt(csvRecord.get("guestTicket")),
-                        csvRecord.get("firstName"),
-                        csvRecord.get("lastName"),
-                        csvRecord.get("middleInitial"),
-                        Integer.parseInt(csvRecord.get("ticket")),
-                        Integer.parseInt(csvRecord.get("grade")),
-                        csvRecord.get("paymentMethod"),
-                        csvRecord.get("guest")
+                        !csvRecord.get("ID").equals("") ? Integer.parseInt(csvRecord.get("ID")) : null,
+                        !csvRecord.get("Guest Ticket Number").equals("") ? Integer.parseInt(csvRecord.get("Guest Ticket Number")) : null,
+                        csvRecord.get("FIRST"),
+                        csvRecord.get("LAST"),
+                        csvRecord.get("MI"),
+                        Integer.parseInt(csvRecord.get("Ticket")),
+                        !csvRecord.get("GR").equals("") ? Integer.parseInt(csvRecord.get("GR")) : null,
+                        csvRecord.get("Payment Method"),
+                        csvRecord.get("Guest YN")
                 );
                 students.add(tutorial);
                 id++;
             }
+            System.out.println("reached");
             return students;
         } catch (IOException e) {
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
