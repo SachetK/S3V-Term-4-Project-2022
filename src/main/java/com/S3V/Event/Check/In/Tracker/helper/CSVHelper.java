@@ -26,10 +26,8 @@ public class CSVHelper {
                      CSVFormat.EXCEL.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim())) {
             List<Student> students = new ArrayList<>();
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
-            Long id = 1L;
             for (CSVRecord csvRecord : csvRecords) {
                 Student tutorial = new Student(
-                        id,
                         !csvRecord.get("ID").equals("") ? Integer.parseInt(csvRecord.get("ID")) : null,
                         !csvRecord.get("Guest Ticket Number").equals("") ? Integer.parseInt(csvRecord.get("Guest Ticket Number")) : null,
                         csvRecord.get("FIRST"),
@@ -41,7 +39,6 @@ public class CSVHelper {
                         csvRecord.get("Guest YN")
                 );
                 students.add(tutorial);
-                id++;
             }
             System.out.println("reached");
             return students;

@@ -46,8 +46,7 @@ public class Student {
 
     }
 
-    public Student(long id, Integer countyId, Integer guestTicket, String firstName, String lastName, String middleInitial, int ticket, Integer grade, String paymentMethod, String guest) {
-        this.id = id;
+    public Student(Integer countyId, Integer guestTicket, String firstName, String lastName, String middleInitial, int ticket, Integer grade, String paymentMethod, String guest) {
         this.countyId = countyId;
         this.guestTicket = guestTicket;
         this.firstName = firstName;
