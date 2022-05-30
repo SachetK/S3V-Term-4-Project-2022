@@ -30,15 +30,15 @@ class LoginComponent extends Component {
                 <div className="box-wrapper">
                     <div className="col-md-6">
                         <div className="form-group">
-                        <label style={{ color: "white"}}>Username</label>
-                        <input className="form-control" type="text" id="username" size="6"/>
+                            <label style={{ color: "white"}}>Username</label>
+                            <input className="form-control" type="text" id="username" size="6"/>
                         </div>
                         <div className="form-group">
-                        <label style={{ color: "white"}}>Password</label>
-                        <input className="form-control" type="password" id="password" size="6"/>
+                            <label style={{ color: "white"}}>Password</label>
+                            <input className="form-control" type="password" id="password" size="6"/>
                         </div>
                         <div className="form-group">
-                        <button className="btn btn-md btn-success" type="button" id="loginBtn">Login</button>
+                            <button className="btn btn-md btn-success" type="button" id="loginBtn">Login</button>
                         </div>
                     </div>
                 </div>
