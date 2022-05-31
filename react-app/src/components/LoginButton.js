@@ -2,15 +2,15 @@ import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const LoginButton = () => {
-    const { loginWithRedirect, isAuthenticated } = useAuth0;
-    return (
-        !isAuthenticated && (
-            <button onClick = {() => loginWithRedirect()}>
-                Login 
-            </button>
-        )
-        
-    );
+  const { loginWithRedirect } = useAuth0();
+  return (
+    <button
+    className="btn btn-md btn-success"
+    onClick={() => loginWithRedirect()}
+    >
+      Log In
+    </button>
+  );
 };
 
 export default LoginButton;
