@@ -6,6 +6,7 @@ import LoginComponent from './components/LoginComponent';
 import Login from './components/Login';
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
+import LoginButton from './components/LoginButton';
 
 function App() {
   const [token, setToken] = useState();
@@ -13,20 +14,18 @@ function App() {
     <LoginComponent setToken = {setToken} />
   }
   return (
-    <div>
-      <Router>
-          <HeaderComponent />
-          <div className = "container">
-            <Switch>
-              <Route exact path = "/" component = {LoginComponent}></Route>
-              <Route path = "/login" component = {Login}></Route>
-              <Route path = "/students" component = {ListPersonComponent}></Route>
-              <LoginComponent />
-            </Switch>
-          </div>
-          <FooterComponent />
-      </Router>
-    </div>
+    <Router>
+        <HeaderComponent />
+        <div className = "container">
+          <Switch>
+            <Route exact path = "/" component = {LoginComponent}></Route>
+            <Route path = "/login" component = {LoginButton}></Route>
+            <Route path = "/students" component = {ListPersonComponent}></Route>
+            <LoginComponent />
+          </Switch>
+        </div>
+        <FooterComponent />
+    </Router>
   );
 }
 

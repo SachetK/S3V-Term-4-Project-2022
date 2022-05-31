@@ -1,4 +1,5 @@
 import React, { Component } from 'react'; 
+import LoginButton from './LoginButton';
 
 class LoginComponent extends Component {
     constructor(props){
@@ -38,7 +39,7 @@ class LoginComponent extends Component {
                             <input className="form-control" type="password" id="password" size="6"/>
                         </div>
                         <div className="form-group">
-                            <button className="btn btn-md btn-success" type="button" id="loginBtn">Login</button>
+                            <LoginButton />
                         </div>
                     </div>
                 </div>

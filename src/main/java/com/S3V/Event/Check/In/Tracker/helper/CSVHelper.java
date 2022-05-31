@@ -40,7 +40,6 @@ public class CSVHelper {
                 );
                 students.add(tutorial);
             }
-            System.out.println("reached");
             return students;
         } catch (IOException e) {
             throw new RuntimeException("fail to parse CSV file: " + e.getMessage());
