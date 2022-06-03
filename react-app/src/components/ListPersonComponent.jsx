@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PersonService from '../services/PersonService';
+import { Table } from "react-bootstrap";
 
 class ListPersonComponent extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class ListPersonComponent extends Component {
             <div>
                 <h2 className = "text-center" style={{ color: "white"}}> Student List </h2>
                 <div className = "row" style={{ color: "white"}}>
-                    <table className = "table table-striped table-bordered">
+                    <Table striped bordered hover variant = "dark">
                         <thead>
                             <tr>
                                 <th> Student Ticket Number</th>
@@ -31,7 +32,7 @@ class ListPersonComponent extends Component {
                                 <th> Student First Name</th>
                                 <th> Grade</th>
                                 <th> Payment Method</th>
-                                <th> Guest YN</th>
+                                <th> Guest Y/N</th>
                                 <th> Guest Ticket Number</th>
                                 <th> Actions</th>
                             </tr>
@@ -50,12 +51,12 @@ class ListPersonComponent extends Component {
                                         <td> {person.grade} </td>
                                         <td> {person.paymentMethod} </td>
                                         <td> {person.guest} </td>
-                                        <td> {person.guestTicket} </td>                                        
+                                        <td> {person.guestTicket} </td>
                                     </tr>
                                 )
                             }
                         </tbody>
-                    </table>
+                    </Table>
                 </div>
             </div>
         );

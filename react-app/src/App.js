@@ -1,28 +1,25 @@
 import './App.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ListPersonComponent from './components/ListPersonComponent';
-import LoginComponent from './components/LoginComponent';
+import HomeComponent from './components/HomeComponent';
 import HeaderComponent from './components/HeaderComponent';
-import FooterComponent from './components/FooterComponent';
+import HelpComponent from './components/HelpComponent';
+import { Container } from 'react-bootstrap';
 
 function App() {
-  const [token, setToken] = useState();
-  if(!token) {
-    <LoginComponent setToken = {setToken} />
-  }
   return (
     <Router>
         <HeaderComponent />
-        <div className = "container">
+        <Container>
           <Switch>
-            <Route exact path = "/" component = {LoginComponent}></Route>
-            <Route path = "/login" component = {LoginComponent}></Route>
+            <Route exact path = "/" component = {HomeComponent}></Route>
+            <Route path = "/login" component = {HomeComponent}></Route>
             <Route path = "/students" component = {ListPersonComponent}></Route>
-            <LoginComponent />
+            <Route path = "/help" component = {HelpComponent}></Route>
+            <HomeComponent />
           </Switch>
-        </div>
-        <FooterComponent />
+        </Container>
     </Router>
   );
 }
