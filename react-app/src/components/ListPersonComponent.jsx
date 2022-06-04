@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PersonService from '../services/PersonService';
-import { Table } from "react-bootstrap";
+import '../App.css';
+
+import { Table, Button, ButtonGroup } from "react-bootstrap";
 
 class ListPersonComponent extends Component {
     constructor(props) {
@@ -16,12 +18,11 @@ class ListPersonComponent extends Component {
             this.setState({people: res.data});
         });
     }
-
+    
     render() {
         return (
             <div>
                 <h2 className = "text-center" style={{ color: "white"}}> Student List </h2>
-                <div className = "row" style={{ color: "white"}}>
                     <Table striped bordered hover variant = "dark">
                         <thead>
                             <tr>
@@ -52,12 +53,17 @@ class ListPersonComponent extends Component {
                                         <td> {person.paymentMethod} </td>
                                         <td> {person.guest} </td>
                                         <td> {person.guestTicket} </td>
+                                        <td> 
+                                            <ButtonGroup role = "group" size = 'sm' >
+                                                <Button variant = "dark">More Info</Button>
+                                                <Button variant = "dark">Check in</Button>
+                                            </ButtonGroup>
+                                        </td>
                                     </tr>
                                 )
                             }
                         </tbody>
                     </Table>
-                </div>
             </div>
         );
     }
