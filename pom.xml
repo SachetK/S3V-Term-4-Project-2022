@@ -69,6 +69,14 @@
             <version>23.0.0</version>
             <scope>compile</scope>
         </dependency>
+
+		<dependency>
+            <groupId>net.sourceforge.jwebunit</groupId>
+            <artifactId>jwebunit-htmlunit-plugin</artifactId>
+            <version>3.3</version>
+            <scope>test</scope>
+        </dependency>
+		
     </dependencies>
 
 	<build>
