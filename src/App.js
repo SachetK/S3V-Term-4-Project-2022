@@ -16,7 +16,7 @@ function App() {
           <Switch>
             <Route exact path = "/" component = {HomeComponent}></Route>
             <Route path = "/login" component = {HomeComponent}></Route>
-            <ProtectedRoute path = "/students" component = {ListPersonComponent}></ProtectedRoute>
+            <Route path = "/students" component = {ListPersonComponent}></Route>
             <Route path = "/help" component = {HelpComponent}></Route>
             <HomeComponent />
           </Switch>
