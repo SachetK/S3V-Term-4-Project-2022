@@ -7,10 +7,10 @@ import HeaderComponent from './components/HeaderComponent';
 import HelpComponent from './components/HelpComponent';
 import { Container } from 'react-bootstrap';
 import ProtectedRoute from './auth/protected-route';
-import useRedirectToHttps from './auth/useRedirectToHTTPS';
+import useRedirectToHTTPS from './auth/useRedirectToHTTPS';
 
 function App() {
-  useRedirectToHttps();
+  useRedirectToHTTPS();
   return (
     <Router>
         <HeaderComponent />
