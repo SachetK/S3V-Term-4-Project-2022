@@ -17,7 +17,7 @@ function App() {
             <Route exact path = "/" component = {HomeComponent}></Route>
             <Route path = "/login" component = {HomeComponent}></Route>
             <Route path = "/students" component = {ListPersonComponent}></Route>
-            <Route path = "/help" component = {HelpComponent}></Route>
+            <ProtectedRoute path = "/help" component = {HelpComponent}></ProtectedRoute>
             <HomeComponent />
           </Switch>
         </Container>
