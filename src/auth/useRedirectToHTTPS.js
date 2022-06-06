@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from "react-router";
 
-const useRedirectToHttps = () => {
+const useRedirectToHTTPS = () => {
     let location = useLocation()
     useEffect(() => {
         
@@ -11,4 +11,4 @@ const useRedirectToHttps = () => {
     })
 };
 
-export default useRedirectToHttps;
+export default useRedirectToHTTPS;

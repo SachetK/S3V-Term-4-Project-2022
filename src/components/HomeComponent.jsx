@@ -1,6 +1,9 @@
 import React from 'react'; 
+import useRedirectToHTTPS from '../auth/useRedirectToHTTPS';
 
 const HomeComponent = () => {
+    useRedirectToHTTPS();
+    
     return (
         <div className="container  animated fadeIn">
             <div className="title float-left">
