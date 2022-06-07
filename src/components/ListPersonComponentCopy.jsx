@@ -29,9 +29,6 @@ const ListPersonComponentCopy = () => {
     return (
         <div>
             <h2 className = "text-center" style={{ color: "white"}}> Student List </h2>
-                <div>
-                    <input>Search</input>
-                </div>
                 <Table striped bordered hover variant = "dark">
                     <thead>
                         <tr>
