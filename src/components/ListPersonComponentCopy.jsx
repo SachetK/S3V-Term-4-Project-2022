@@ -71,9 +71,13 @@ const ListPersonComponentCopy = () => {
                     </tbody>
                 </Table>
 
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>More info on {modalData.firstName + " " + modalData.lastName}</Modal.Title>
+            <Modal
+                size="lg"
+                show={show} 
+                onHide={handleClose}
+            >
+            <Modal.Header closeButton>
+                <Modal.Title>More info on {modalData.firstName + " " + modalData.lastName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <table class="table">
