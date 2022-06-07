@@ -10,7 +10,6 @@ import useRedirectToHTTPS from './auth/useRedirectToHTTPS';
 import ListPersonComponentCopy from './components/ListPersonComponentCopy';
 
 function App() {
-  useRedirectToHTTPS();
   return (
     <Router>
         <HeaderComponent />
