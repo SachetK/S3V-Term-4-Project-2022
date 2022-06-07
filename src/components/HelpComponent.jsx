@@ -1,7 +1,6 @@
 import React from 'react';
 import { Tab, Row, Nav, Col, Card } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
-import useRedirectToHTTPS from '../auth/useRedirectToHTTPS';
 
 const HelpComponent = () => {
     return (
