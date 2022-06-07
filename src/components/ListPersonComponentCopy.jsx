@@ -7,7 +7,7 @@ import { Table, Button, ButtonGroup, Modal } from "react-bootstrap";
 const ListPersonComponentCopy = () => {
     const [people, setPeople] = useState([]);
     const [searchTerm, setTerm] = useState('');
-    const [modalData, setModalData] = useState([]);
+    const [modalData, setModalData] = useState({});
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
