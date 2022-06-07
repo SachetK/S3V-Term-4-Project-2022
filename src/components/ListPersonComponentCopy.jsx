@@ -2,12 +2,20 @@ import React, { useEffect, useState } from 'react';
 import PersonService from '../services/PersonService';
 import '../App.css';
 
-import { Table, Button, ButtonGroup } from "react-bootstrap";
+import { Table, Button, ButtonGroup, Modal } from "react-bootstrap";
 
 const ListPersonComponentCopy = () => {
     const [people, setPeople] = useState([]);
     const [searchTerm, setTerm] = useState('');
+    const [modalData, setModalData] = useState([]);
+    const [show, setShow] = useState(false);
 
+    const handleClose = () => setShow(false);
+    const handleShow = (person) => {
+        console.log(person);
+        setModalData(person);
+        setShow(true);        
+    };
     
     useEffect(() => {
         PersonService.getPeople().then(
@@ -52,7 +60,7 @@ const ListPersonComponentCopy = () => {
                                     <td> {person.guestTicket} </td>
                                     <td> 
                                         <ButtonGroup role = "group" size = 'sm' >
-                                            <Button variant = "dark">More Info</Button>
+                                            <Button variant = "dark" onClick = { handleShow(person) }>More Info</Button>
                                             <Button variant = "dark">Check in</Button>
                                         </ButtonGroup>
                                     </td>
@@ -61,6 +69,28 @@ const ListPersonComponentCopy = () => {
                         }
                     </tbody>
                 </Table>
+
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p> {modalData.ticket} </p>
+                    <p> {modalData.countyId} </p>
+                    <p> {modalData.lastName} </p>
+                    <p> {modalData.middleInitial} </p>
+                    <p> {modalData.firstName} </p>
+                    <p> {modalData.grade} </p>
+                    <p> {modalData.paymentMethod} </p>
+                    <p> {modalData.guest} </p>
+                    <p> {modalData.guestTicket} </p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 };
