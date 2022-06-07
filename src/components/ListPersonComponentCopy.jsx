@@ -11,6 +11,7 @@ const ListPersonComponentCopy = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
+    
     const handleShow = (person) => {
         console.log(person);
         setModalData(person);
@@ -60,7 +61,7 @@ const ListPersonComponentCopy = () => {
                                     <td> {person.guestTicket} </td>
                                     <td> 
                                         <ButtonGroup role = "group" size = 'sm' >
-                                            <Button variant = "dark" onClick = { handleShow(person) }>More Info</Button>
+                                            <Button variant = "dark" onClick = {() => handleShow(person) }>More Info</Button>
                                             <Button variant = "dark">Check in</Button>
                                         </ButtonGroup>
                                     </td>
