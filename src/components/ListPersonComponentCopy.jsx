@@ -73,18 +73,37 @@ const ListPersonComponentCopy = () => {
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>More info on {modalData.firstName + " " + modalData.lastName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p> {modalData.ticket} </p>
-                    <p> {modalData.countyId} </p>
-                    <p> {modalData.lastName} </p>
-                    <p> {modalData.middleInitial} </p>
-                    <p> {modalData.firstName} </p>
-                    <p> {modalData.grade} </p>
-                    <p> {modalData.paymentMethod} </p>
-                    <p> {modalData.guest} </p>
-                    <p> {modalData.guestTicket} </p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Ticket</th>
+                                <th>ID</th>
+                                <th>LAST</th>
+                                <th>MI</th>
+                                <th>FIRST</th>
+                                <th>GR</th>
+                                <th>Payment Method</th>
+                                <th>Guest YN</th>
+                                <th>Guest Ticket Number</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{modalData.ticket} </td>
+                                <td> {modalData.countyId} </td>
+                                <td> {modalData.lastName} </td>
+                                <td> {modalData.middleInitial} </td>
+                                <td> {modalData.firstName} </td>
+                                <td> {modalData.grade} </td>
+                                <td> {modalData.tdaymentMethod} </td>
+                                <td> {modalData.guest} </td>
+                                <td> {modalData.guestTicket} </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
