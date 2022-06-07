@@ -1,9 +1,10 @@
-import React from 'react'; 
-import useRedirectToHTTPS from '../auth/useRedirectToHTTPS';
+import React, { useEffect } from 'react'; 
 
-const HomeComponent = () => {
-    useRedirectToHTTPS();
-    
+const HomeComponent = () => {    
+    useEffect(() => {
+        PersonService.getPeople();
+    }, []);
+
     return (
         <div className="container  animated fadeIn">
             <div className="title float-left">

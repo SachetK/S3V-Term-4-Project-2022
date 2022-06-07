@@ -4,7 +4,6 @@ import CardHeader from 'react-bootstrap/esm/CardHeader';
 import useRedirectToHTTPS from '../auth/useRedirectToHTTPS';
 
 const HelpComponent = () => {
-    useRedirectToHTTPS();
     return (
         <Card bg = "dark" text = "white">
             <CardHeader as = "h3" >Help</CardHeader>
