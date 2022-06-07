@@ -20,7 +20,6 @@ const ListPersonComponentCopy = () => {
     return (
         <div>
             <h2 className = "text-center" style={{ color: "white"}}> Student List </h2>
-            <input type="text" value = {searchTerm} onChange = {(e) => setTerm(e)}></input>
                 <Table striped bordered hover variant = "dark">
                     <thead>
                         <tr>
