@@ -14,8 +14,8 @@ const ListPersonComponentCopy = () => {
             (res) => {
                 setPeople(res.data);
             }
-            )
-        }, []);
+        )
+    }, []);
     
     return (
         <div>
