@@ -9,7 +9,8 @@ class ListPersonComponent extends Component {
         super(props)
 
         this.state = {
-            people: []
+            people: [],
+            searchTerm: ""
         }
     }
     
@@ -23,6 +24,7 @@ class ListPersonComponent extends Component {
         return (
             <div>
                 <h2 className = "text-center" style={{ color: "white"}}> Student List </h2>
+                <input type="text" value = {e} onChange = {(e) => this.setState({searchTerm: e})}></input>
                     <Table striped bordered hover variant = "dark">
                         <thead>
                             <tr>
