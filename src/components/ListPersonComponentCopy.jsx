@@ -76,7 +76,7 @@ const ListPersonComponentCopy = () => {
                 show={show} 
                 onHide={handleClose}
             >
-            <Modal.Header closeButton>
+            <Modal.Header>
                 <Modal.Title>More info on {modalData.firstName + " " + modalData.lastName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
