@@ -24,7 +24,7 @@ class ListPersonComponent extends Component {
         return (
             <div>
                 <h2 className = "text-center" style={{ color: "white"}}> Student List </h2>
-                <input type="text" value = {searchTerm} onChange = {(e) => this.setState({searchTerm: e})}></input>
+                <input type="text" value = {this.state.searchTerm} onChange = {(e) => this.setState({searchTerm: e})}></input>
                     <Table striped bordered hover variant = "dark">
                         <thead>
                             <tr>
