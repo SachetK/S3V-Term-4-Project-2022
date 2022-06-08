@@ -15,8 +15,8 @@ const ListPersonComponent = () => {
     
     const handleShow = (person) => {
         setModalData(person);
-        if(person.guestData === 'Y'){
-            setGuestData(people.find(o => o.ticket === person.guestTicket));
+        if(person.guestData == 'Y'){
+            setGuestData(people.find(o => o.ticket == person.guestTicket));
             console.log(guestData);
         }
         setShow(true);        
