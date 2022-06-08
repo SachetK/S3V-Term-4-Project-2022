@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PersonService from '../services/PersonService';
 import '../App.css';
 
-import { Table, Button, ButtonGroup, Modal } from "react-bootstrap";
+import { Table, Button, ButtonGroup, ButtonToolbar, Modal, Form, InputGroup } from "react-bootstrap";
 
 const ListPersonComponent = () => {
     const [people, setPeople] = useState([]);
-    // const [searchTerm, setTerm] = useState('');
+    const [searchTerm, setTerm] = useState('');
     const [modalData, setModalData] = useState({});
     const [counterpartData, setCounterpartData] = useState({});
     const [isGuest, setIsGuest] = useState(false);
@@ -28,6 +28,11 @@ const ListPersonComponent = () => {
         setShow(true);        
     };
     
+    function inputFocus(){
+        document.getElementById("Search Bar").focus();
+    }
+    window.onkeydown = inputFocus;
+    
     useEffect(() => {
         PersonService.getPeople().then(
             (res) => {
@@ -39,7 +44,28 @@ const ListPersonComponent = () => {
     return (
         <div>
             <h2 className = "text-center" style={{ color: "white"}}> Student List </h2>
-                <Table striped bordered hover variant = "dark">
+            
+            <ButtonToolbar
+                    className="justify-content-between"
+                    aria-label="Toolbar with Button groups"
+                    style = {{marginTop: 5, marginBottom: 5}}
+                >
+                    <InputGroup>
+                        <Form.Control 
+                            id = "Search Bar"
+                            type = "text" 
+                            placeholder = "Search..."
+                            onChange = { text => {
+                                setTerm(text.target.value)
+                            }}
+                        />
+                    </InputGroup>
+                    <ButtonGroup aria-label="First group">
+                        <Button variant="secondary">Import</Button>{' '}
+                        <Button variant="secondary">Export</Button>
+                    </ButtonGroup>
+                </ButtonToolbar>
+                <Table striped bordered hover variant = "dark" style = {{marginTop: 5}}>
                     <thead>
                         <tr>
                             <th> Student Ticket Number</th>
@@ -57,7 +83,16 @@ const ListPersonComponent = () => {
 
                     <tbody>
                         {
-                            people.map(
+                            people.filter((val) => {
+                                if (searchTerm == ""){
+                                    return val;
+                                } else if (val.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                            val.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                            val.ticket.toString().includes(searchTerm.toLowerCase()) || 
+                                            (val.countyId != null ? val.countyId.toString().includes(searchTerm.toLowerCase()) : false)) {
+                                    return val;
+                                }
+                            }).map(
                                 person =>
                                 <tr key = {person.id}>
                                     <td> {person.ticket} </td>
