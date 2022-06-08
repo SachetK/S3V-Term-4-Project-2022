@@ -9,15 +9,19 @@ const ListPersonComponent = () => {
     // const [searchTerm, setTerm] = useState('');
     const [modalData, setModalData] = useState({});
     const [counterpartData, setCounterpartData] = useState({});
+    const [isGuest, setIsGuest] = useState(false);
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     
     const handleShow = (person) => {
         setModalData(person);
+        
+        setIsGuest(people.find(o => o.guestTicket === person.ticket) != null ? true : false);
+        
         if(person.guest === 'Y'){
             setCounterpartData(people.find(o => o.ticket === person.guestTicket));
-        } else if (person.countyId == null) {
+        } else if (isGuest) {
             setCounterpartData(people.find(o => o.guestTicket === person.ticket));
         }
 
@@ -86,7 +90,7 @@ const ListPersonComponent = () => {
                 <Modal.Title>More Info on {modalData.firstName + " " + modalData.lastName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <h3>{ modalData.countyId != null ? "Student: " : "Guest: " }</h3>
+                    <h3>{ !isGuest ? "Student: " : "Guest: " }</h3>
                     <table className="table">
                         <thead>
                             <tr>
@@ -115,9 +119,9 @@ const ListPersonComponent = () => {
                             </tr>
                         </tbody>
                     </table>
-                   { (modalData.guest === 'Y' || modalData.countyId == null) &&
+                   { (modalData.guest === 'Y' || isGuest) &&
                     <>
-                        <h3>{ modalData.countyId != null ? "Guest: " : "Student: " } </h3>
+                        <h3>{ isGuest ? "Student: " : "Guest: " } </h3>
                         <table className="table">
                             <thead>
                                 <tr>
