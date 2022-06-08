@@ -16,7 +16,7 @@ const ListPersonComponent = () => {
     const handleShow = (person) => {
         setModalData(person);
         if(person.guestData === 'Y'){
-            setGuestData(people.find(o => o.ticket === person.ticket));
+            setGuestData(people.find(o => o.ticket === person.guestTicket));
         }
         setShow(true);        
     };
@@ -113,7 +113,7 @@ const ListPersonComponent = () => {
                         </tbody>
                     </table>
                    { modalData.guest === 'Y' &&
-                        <>
+                    <>
                         <h1>Guest: </h1>
                         <table class="table">
                             <thead>
