@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PersonService from '../services/PersonService';
 import '../App.css';
 
-import { Table, Button, ButtonGroup, ButtonToolbar, Modal, Form, InputGroup } from "react-bootstrap";
+import { Table, Button, ButtonGroup, ButtonToolbar, Modal, Form, InputGroup, ToggleButton } from "react-bootstrap";
 
 const ListPersonComponent = () => {
     const [people, setPeople] = useState([]);
@@ -58,12 +58,19 @@ const ListPersonComponent = () => {
                             onChange = { text => {
                                 setTerm(text.target.value)
                             }}
-                        />
+                        />    
                     </InputGroup>
-                    <ButtonGroup aria-label="First group">
-                        <Button variant="secondary">Import</Button>{' '}
-                        <Button variant="secondary">Export</Button>
+                    
+                    <ButtonGroup>
+                        <Button> Toggle Log Messages </Button>
                     </ButtonGroup>
+                    
+                    <ButtonGroup aria-label="First group">
+                        <Button variant="secondary">Import</Button>
+                        <Button variant="secondary">Export</Button>
+                        <Button variant="danger">Clear DB</Button>
+                    </ButtonGroup>
+
                 </ButtonToolbar>
                 <Table striped bordered hover variant = "dark" style = {{marginTop: 5}}>
                     <thead>
@@ -94,7 +101,7 @@ const ListPersonComponent = () => {
                                 }
                             }).map(
                                 person =>
-                                <tr key = {person.id}>
+                                <tr className = "red" key = {person.id}>
                                     <td> {person.ticket} </td>
                                     <td> {person.countyId} </td>
                                     <td> {person.lastName} </td>
