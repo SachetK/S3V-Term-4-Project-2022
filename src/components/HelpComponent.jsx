@@ -46,7 +46,7 @@ const HelpComponent = () => {
                                     <h1 >Uploading Data</h1>
                                     <p>To upload the student data file, select the "Students" option and click "Choose file" to select which file (.csv) to upload. Then, submit.</p>
                                     <p> The uploaded file MUST be in the following format: </p>
-                                    <table class="table">
+                                    <table className ="table">
                                         <thead>
                                         <tr>
                                             <th>Ticket</th>
