@@ -115,28 +115,30 @@ const ListPersonComponent = () => {
                    { modalData.guest === 'Y' &&
                         <>
                         <h1>Guest: </h1>
-                        <thead>
-                            <tr>
-                                <th>Ticket</th>
-                                <th>ID</th>
-                                <th>LAST</th>
-                                <th>MI</th>
-                                <th>FIRST</th>
-                                <th>GR</th>
-                                <th>Payment Method</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td> {guestData.ticket} </td>
-                                <td> {guestData.countyId} </td>
-                                <td> {guestData.lastName} </td>
-                                <td> {guestData.middleInitial} </td>
-                                <td> {guestData.firstName} </td>
-                                <td> {guestData.grade} </td>
-                                <td> {guestData.paymentMethod} </td>
-                            </tr>
-                        </tbody>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Ticket</th>
+                                    <th>ID</th>
+                                    <th>LAST</th>
+                                    <th>MI</th>
+                                    <th>FIRST</th>
+                                    <th>GR</th>
+                                    <th>Payment Method</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> { guestData.ticket } </td>
+                                    <td> { guestData.countyId } </td>
+                                    <td> { guestData.lastName } </td>
+                                    <td> { guestData.middleInitial } </td>
+                                    <td> { guestData.firstName } </td>
+                                    <td> { guestData.grade } </td>
+                                    <td> { guestData.paymentMethod } </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </>
                    }
                 </Modal.Body>
