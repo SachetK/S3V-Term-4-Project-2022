@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PersonService from '../services/PersonService';
+import AuthenticationButton from './AuthenticationButton';
 
 const HomeComponent = () => {    
     useEffect(() => {
@@ -17,11 +18,15 @@ const HomeComponent = () => {
             <div className="clearfix">
 
             </div>
+            <div className="float-right">
+                
+            </div>
             <div className="wrapper">
                 <div className="company-info">
                     <div id="logo-wrapper">
                         <img src="/images/PHSLogo.png" width="200" height="200" alt="Logo" id="logo"/>
                     </div>
+                    
                 </div>
             </div>
         </div>
