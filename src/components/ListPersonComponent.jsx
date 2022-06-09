@@ -2,18 +2,22 @@ import React, { useEffect, useState } from 'react';
 import PersonService from '../services/PersonService';
 import '../App.css';
 
-import { Table, Button, ButtonGroup, ButtonToolbar, Modal, Form, InputGroup } from "react-bootstrap";
+import { Table, Button, ButtonGroup, ButtonToolbar, Modal, Form, InputGroup, Alert } from "react-bootstrap";
 
-const ListPersonComponent = () => {
+const ListPersonComponent = () => {  
     //Database structure
     const [people, setPeople] = useState([]);
-    
+
     //Clear Database
     const [clearDatabase, setClearDatabase] = useState(false);
-    
+    const [importModal, setImportModal] = useState(false);
+
     // searching
     const [searchTerm, setTerm] = useState('');
     
+    //import
+    const [file, setFile] = useState(null);
+
     // more info for students
     const [modalData, setModalData] = useState({});
     const [counterpartData, setCounterpartData] = useState({});
@@ -55,11 +59,12 @@ const ListPersonComponent = () => {
     
     return (
         <div>
-            <h2 className = "text-center" style={{ color: "white"}}> Student List </h2>
+            <h2 className = "text-center" style={{ color: "white" }}> Student List </h2>
+            {/* <p style={{ color: "white" }}>{people.length + " Total Students"}</p> */}
             <ButtonToolbar
                     className="justify-content-between"
                     aria-label="Toolbar with Button groups"
-                    style = {{marginTop: 5, marginBottom: 10}}
+                    style = {{marginTop: 50, marginBottom: 20}}
                 >
                     <InputGroup>
                         <Form.Control 
@@ -69,21 +74,20 @@ const ListPersonComponent = () => {
                             onChange = { text => {
                                 setTerm(text.target.value)
                             }}
-                        />    
+                        />
+                        <Button variant="outline-light" onClick={() => setImportModal(true)}>Upload</Button>{' '}
+                        <Button variant="outline-light">Export</Button>    
                     </InputGroup>
                     
-                    <ButtonGroup>
-                        <Button> Toggle Log Messages </Button>
-                    </ButtonGroup>
-                    
                     <ButtonGroup aria-label="First group">
-                        <Button variant="secondary">Import</Button>
-                        <Button variant="secondary">Export</Button>
+                        <Button variant='outline-primary'> Toggle Log Messages </Button>
+                        
                         <Button 
                             variant="danger"
                             onClick = { () => setClearDatabase(true) }
                         >Clear DB</Button>
                     </ButtonGroup>
+                    
                     <Modal
                         size="lg"
                         show = {clearDatabase}
@@ -108,6 +112,48 @@ const ListPersonComponent = () => {
                                     .then(() => closeDelete())
                                 }
                             > Clear Database </Button>
+                            
+                        </Modal.Footer>
+                    </Modal>
+
+                    <Modal
+                        size="lg"
+                        show = {importModal}
+                        onHide = {() => setImportModal(false)}
+                        centered
+                    >
+                        <Modal.Header>
+                            <Modal.Title id="contained-modal-title-vcenter">
+                                Upload Data
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>
+                                Please note that importing another dataset will delete the current contents of this website. Download before you import if you wish to save the content!
+                            </p>
+                            <Form.Group controlId="formFile" className="mb-3">
+                                <Form.Control type="file" onChange={(value) => setFile(value.target.files[0])} />
+                            </Form.Group>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={() => setImportModal(false)}>Close</Button>
+                            <Button variant = "success"
+                                onClick = {
+                                    () => {
+                                        const formData = new FormData();
+                                        formData.append('file' , file);
+                                        PersonService.deletePeople().then(
+                                            PersonService.uploadPeople(formData).then((res) => {
+                                                setImportModal(false);
+                                                alert(res.data.message);
+                                            }).catch((err) => {
+                                                setImportModal(false);
+                                                alert("Failed to upload!");
+                                            })
+                                        )
+                                    }
+                                }
+                            > Upload </Button>
                             
                         </Modal.Footer>
                     </Modal>
@@ -141,7 +187,7 @@ const ListPersonComponent = () => {
                                 }
                             }).map(
                                 person =>
-                                <tr key = {person.id}>
+                                <tr key = {person.id} style = {{backgroundColor: person.checkedIn == null ? null : "red"}}>
                                     <td> {person.ticket} </td>
                                     <td> {person.countyId} </td>
                                     <td> {person.lastName} </td>
@@ -154,7 +200,16 @@ const ListPersonComponent = () => {
                                     <td> 
                                         <ButtonGroup role = "group" size = 'sm' >
                                             <Button variant = "dark" onClick = {() => handleShow(person) }>More Info</Button>
-                                            <Button variant = "dark">Check in</Button>
+                                            <Button variant = "dark" onClick = {() => {
+                                                console.log(person.checkedIn);
+                                                if(person.checkedIn === null) {
+                                                    person.checkedIn = true;
+                                                } else{
+                                                    person.checkedIn ? person.checkedIn = false : person.checkedIn = true;
+                                                    console.log(person.checkedIn);
+                                                }
+                                                }}
+                                            >Check In</Button>
                                         </ButtonGroup>
                                     </td>
                                 </tr>
@@ -234,7 +289,7 @@ const ListPersonComponent = () => {
                         </table>
                     </>
                    }
-                    <h3><a href='\help'>Logs</a></h3>
+                    <h3><a href=''>Logs</a></h3>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
