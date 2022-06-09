@@ -2,15 +2,25 @@ import React, { useEffect, useState } from 'react';
 import PersonService from '../services/PersonService';
 import '../App.css';
 
-import { Table, Button, ButtonGroup, ButtonToolbar, Modal, Form, InputGroup, ToggleButton } from "react-bootstrap";
+import { Table, Button, ButtonGroup, ButtonToolbar, Modal, Form, InputGroup } from "react-bootstrap";
 
 const ListPersonComponent = () => {
+    //Database structure
     const [people, setPeople] = useState([]);
+    
+    //Clear Database
+    const [clearDatabase, setClearDatabase] = useState(false);
+    
+    // searching
     const [searchTerm, setTerm] = useState('');
+    
+    // more info for students
     const [modalData, setModalData] = useState({});
     const [counterpartData, setCounterpartData] = useState({});
     const [isGuest, setIsGuest] = useState(false);
     const [show, setShow] = useState(false);
+    
+    const closeDelete = () => setClearDatabase(false);
 
     const handleClose = () => setShow(false);
     
@@ -28,27 +38,28 @@ const ListPersonComponent = () => {
         setShow(true);        
     };
     
+    //redirect input to search bar
     function inputFocus(){
         document.getElementById("Search Bar").focus();
     }
     window.onkeydown = inputFocus;
     
+    //update people whenever changes
     useEffect(() => {
         PersonService.getPeople().then(
             (res) => {
                 setPeople(res.data);
             }
         )
-    }, []);
+    }, [people]);
     
     return (
         <div>
             <h2 className = "text-center" style={{ color: "white"}}> Student List </h2>
-            
             <ButtonToolbar
                     className="justify-content-between"
                     aria-label="Toolbar with Button groups"
-                    style = {{marginTop: 5, marginBottom: 5}}
+                    style = {{marginTop: 5, marginBottom: 10}}
                 >
                     <InputGroup>
                         <Form.Control 
@@ -68,9 +79,38 @@ const ListPersonComponent = () => {
                     <ButtonGroup aria-label="First group">
                         <Button variant="secondary">Import</Button>
                         <Button variant="secondary">Export</Button>
-                        <Button variant="danger">Clear DB</Button>
+                        <Button 
+                            variant="danger"
+                            onClick = { () => setClearDatabase(true) }
+                        >Clear DB</Button>
                     </ButtonGroup>
-
+                    <Modal
+                        size="lg"
+                        show = {clearDatabase}
+                        onHide = {closeDelete}
+                        centered
+                    >
+                        <Modal.Header>
+                            <Modal.Title id="contained-modal-title-vcenter">
+                                Clear Database
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>
+                                Are you sure you want to clear the database? This is a <b>NON-REVERSIBLE</b> action.
+                            </p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={() => closeDelete()}>Close</Button>
+                            <Button variant = "danger"
+                                onClick = {
+                                    () => PersonService.deletePeople()
+                                    .then(() => closeDelete())
+                                }
+                            > Clear Database </Button>
+                            
+                        </Modal.Footer>
+                    </Modal>
                 </ButtonToolbar>
                 <Table striped bordered hover variant = "dark" style = {{marginTop: 5}}>
                     <thead>
@@ -101,7 +141,7 @@ const ListPersonComponent = () => {
                                 }
                             }).map(
                                 person =>
-                                <tr className = "red" key = {person.id}>
+                                <tr key = {person.id}>
                                     <td> {person.ticket} </td>
                                     <td> {person.countyId} </td>
                                     <td> {person.lastName} </td>
