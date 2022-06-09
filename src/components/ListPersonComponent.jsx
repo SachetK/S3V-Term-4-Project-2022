@@ -2,26 +2,46 @@ import React, { useEffect, useState } from 'react';
 import PersonService from '../services/PersonService';
 import '../App.css';
 
-import { Table, Button, ButtonGroup, ButtonToolbar, Modal, Form, InputGroup, Alert } from "react-bootstrap";
-import RowComponent from './RowComponent';
+import { Table, Button, ButtonGroup, ButtonToolbar, Modal, Form, InputGroup } from "react-bootstrap";
 
 const ListPersonComponent = () => {  
     //Database structure
+    const [logs, setLogs] = useState([]);
+    
     const [people, setPeople] = useState([]);
+    const [modalData, setModalData] = useState({});
+    const [counterpartData, setCounterpartData] = useState({});
+    const [isGuest, setIsGuest] = useState(false);    
+    const [show, setShow] = useState(false);
+    
+    const handleClose = () => setShow(false);
+    
+    const handleShow = (person) => {
+        setModalData(person);
+        
+        setIsGuest(people.find(o => o.guestTicket === person.ticket) != null ? true : false);
+        
+        if(person.guest === 'Y'){
+            setCounterpartData(people.find(o => o.ticket === person.guestTicket));
+        } else if (isGuest) {
+            setCounterpartData(people.find(o => o.guestTicket === person.ticket));
+        }
+
+        setShow(true);        
+    };
+
 
     //Clear Database
     const [clearDatabase, setClearDatabase] = useState(false);
     const [importModal, setImportModal] = useState(false);
+    const [showExport, setShowExport] = useState(false);
+
 
     // searching
     const [searchTerm, setTerm] = useState('');
     
     //import
     const [file, setFile] = useState(null);
-
-    //color code table
-    
-    const closeDelete = () => setClearDatabase(false);
     
     //redirect input to search bar
     function inputFocus(){
@@ -38,10 +58,13 @@ const ListPersonComponent = () => {
         )
     }, [people]);
 
+    const closeDelete = () => {
+        setClearDatabase(false);
+    }
+
     return (
         <div>
             <h2 className = "text-center" style={{ color: "white" }}> Student List </h2>
-            {/* <p style={{ color: "white" }}>{people.length + " Total Students"}</p> */}
             <ButtonToolbar
                     className="justify-content-between"
                     aria-label="Toolbar with Button groups"
@@ -57,12 +80,10 @@ const ListPersonComponent = () => {
                             }}
                         />
                         <Button variant="outline-light" onClick={() => setImportModal(true)}>Upload</Button>{' '}
-                        <Button variant="outline-light">Export</Button>    
+                        <Button variant="outline-light" onClick={() => setShowExport(true)}>Export</Button>    
                     </InputGroup>
                     
-                    <ButtonGroup aria-label="First group">
-                        <Button variant='outline-primary'> Toggle Log Messages </Button>
-                        
+                    <ButtonGroup aria-label="First group">                       
                         <Button 
                             variant="danger"
                             onClick = { () => setClearDatabase(true) }
@@ -94,6 +115,29 @@ const ListPersonComponent = () => {
                                 }
                             > Clear Database </Button>
                             
+                        </Modal.Footer>
+                    </Modal>
+                    
+                    <Modal
+                        size="lg"
+                        show = {showExport}
+                        onHide = {() => setShowExport(false)}
+                        centered
+                    >
+                        <Modal.Header>
+                            <Modal.Title id="contained-modal-title-vcenter">
+                                Export Logs
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            {
+                                logs.map(log =>
+                                    <p> {log} </p>    
+                                )
+                            }
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={() => setShowExport(false)}>Close</Button>                           
                         </Modal.Footer>
                     </Modal>
 
@@ -168,13 +212,111 @@ const ListPersonComponent = () => {
                                 }
                             }).map(
                                 person =>
-                                <RowComponent person = {person} people = {people} />
+                                    <tr key = {person.id}>
+                                        <td> {person.ticket} </td>
+                                        <td> {person.countyId} </td>
+                                        <td> {person.lastName} </td>
+                                        <td> {person.middleInitial} </td>
+                                        <td> {person.firstName} </td>
+                                        <td> {person.grade} </td>
+                                        <td> {person.paymentMethod} </td>
+                                        <td> {person.guest} </td>
+                                        <td> {person.guestTicket} </td>
+                                        <td> 
+                                            <ButtonGroup role = "group" size = 'sm' >
+                                                <Button variant = "dark" onClick = {() => handleShow(person) }>More Info</Button>
+                                                <Button variant = "dark" onClick = {() => {
+                                                    PersonService.checkInPerson(person);
+                                                    logs.push("Checked " + person.firstName + " " + person.lastName + " at " + new Date());
+                                                    console.log(logs);
+                                                }}
+                                                >Check In</Button>
+                                            </ButtonGroup>
+                                        </td>
+                                    </tr>                       
                             )
                         }
                     </tbody>
                 </Table>
-
-            
+                <Modal
+                    size="lg"
+                    show={show} 
+                    onHide={handleClose}
+                >
+                <Modal.Header>
+                    <Modal.Title>More Info on {modalData.firstName + " " + modalData.lastName}</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <h3>{ !isGuest ? "Student: " : "Guest: " }</h3>
+                        <table className="table">
+                            <thead>
+                                <tr>
+                                    <th>Ticket</th>
+                                    <th>ID</th>
+                                    <th>LAST</th>
+                                    <th>MI</th>
+                                    <th>FIRST</th>
+                                    <th>GR</th>
+                                    <th>Payment Method</th>
+                                    <th>Guest YN</th>
+                                    <th>Guest Ticket Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> {modalData.ticket} </td>
+                                    <td> {modalData.countyId} </td>
+                                    <td> {modalData.lastName} </td>
+                                    <td> {modalData.middleInitial} </td>
+                                    <td> {modalData.firstName} </td>
+                                    <td> {modalData.grade} </td>
+                                    <td> {modalData.paymentMethod} </td>
+                                    <td> {modalData.guest} </td>
+                                    <td> {modalData.guestTicket} </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    { (modalData.guest === 'Y' || isGuest) &&
+                        <>
+                            <h3>{ isGuest ? "Student: " : "Guest: " } </h3>
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>Ticket</th>
+                                        <th>ID</th>
+                                        <th>LAST</th>
+                                        <th>MI</th>
+                                        <th>FIRST</th>
+                                        <th>GR</th>
+                                        <th>Payment Method</th>
+                                        <th>Guest YN</th>
+                                        <th>Guest Ticket Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <td> {counterpartData.ticket} </td>
+                                    <td> {counterpartData.countyId} </td>
+                                    <td> {counterpartData.lastName} </td>
+                                    <td> {counterpartData.middleInitial} </td>
+                                    <td> {counterpartData.firstName} </td>
+                                    <td> {counterpartData.grade} </td>
+                                    <td> {counterpartData.paymentMethod} </td>
+                                    <td> {counterpartData.guest} </td>
+                                    <td> {counterpartData.guestTicket} </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </>
+                    }
+                        <h3><a href=''>Logs</a></h3>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>    
         </div>
     );
 };

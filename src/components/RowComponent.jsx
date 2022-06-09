@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
-import { Table, Button, ButtonGroup, ButtonToolbar, Modal, Form, InputGroup, Alert } from "react-bootstrap";
+import { Button, ButtonGroup, Modal } from "react-bootstrap";
+import PersonService from '../services/PersonService';
 
 const RowComponent = props => {
     // more info for students
@@ -7,8 +8,7 @@ const RowComponent = props => {
     const [counterpartData, setCounterpartData] = useState({});
     const [isGuest, setIsGuest] = useState(false);    
     const [show, setShow] = useState(false);
-
-    const [color, setColor] = useState();
+    const [color, setColor] = useState(props.person.checked);
     
     const handleClose = () => setShow(false);
     
@@ -28,7 +28,7 @@ const RowComponent = props => {
     
     return (
         <>
-        <tr key = {props.person.id} style = {{backgroundColor: color === undefined ?  null : (color ? 'green': 'red')}}
+        <tr key = {props.person.id} style = {{backgroundColor: color === null ?  null : (color ? 'green': 'red')}}
         >
             <td> {props.person.ticket} </td>
             <td> {props.person.countyId} </td>
@@ -43,12 +43,14 @@ const RowComponent = props => {
                 <ButtonGroup role = "group" size = 'sm' >
                     <Button variant = "dark" onClick = {() => handleShow(props.person) }>More Info</Button>
                     <Button variant = "dark" onClick = {() => {
-                        if(color === undefined || !color){
+                        if(color === null || !color){
                             setColor(true);
                         } else if (color) {
                             setColor(false);
                         }
-                        }}
+                        console.log(props.person.checked);
+                        PersonService.checkInPerson(props.person);
+                    }}
                     >Check In</Button>
                 </ButtonGroup>
             </td>

@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import PersonService from '../services/PersonService';
-import AuthenticationButton from './AuthenticationButton';
 
 const HomeComponent = () => {    
     useEffect(() => {
