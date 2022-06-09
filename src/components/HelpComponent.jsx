@@ -32,7 +32,7 @@ const HelpComponent = () => {
                             </Nav.Item>
                             
                             <Nav.Item>
-                                <Nav.Link eventKey="Viewing-Tickets">Viewing Tickets and Exploring Data</Nav.Link>
+                                <Nav.Link eventKey="Viewing-Tickets">Viewing Tickets and Exporting Data</Nav.Link>
                             </Nav.Item>
                         </Nav>
                         </Col>
