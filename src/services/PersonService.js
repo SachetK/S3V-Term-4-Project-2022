@@ -14,6 +14,10 @@ class PersonService {
     uploadPeople(file) {
         return axios.post(PERSON_API_BASE_URL + "/uploads", file);
     }
+
+    checkInPerson(person) {
+        return axios.put(PERSON_API_BASE_URL + "/people/" + person.id);
+    }
 }
 
 export default new PersonService()
