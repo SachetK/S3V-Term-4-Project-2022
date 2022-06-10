@@ -51,7 +51,7 @@ const RowComponent = props => {
                         console.log(props.person.checked);
                         PersonService.checkInPerson(props.person);
                     }}
-                    >Check In</Button>
+                    >{props.person.checked ? "Check out" : "Check in"}</Button>
                 </ButtonGroup>
             </td>
         </tr>
