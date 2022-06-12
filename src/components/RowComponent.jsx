@@ -1,15 +1,20 @@
-import { React, useState } from 'react';
+import Color from 'color';
+import { React, useEffect, useState } from 'react';
 import { Button, ButtonGroup, Modal } from "react-bootstrap";
 import PersonService from '../services/PersonService';
 
 const RowComponent = props => {
-    // more info for students
+
+    // more info for students 
     const [modalData, setModalData] = useState({});
     const [counterpartData, setCounterpartData] = useState({});
     const [isGuest, setIsGuest] = useState(false);    
     const [show, setShow] = useState(false);
     const [color, setColor] = useState(props.person.checked);
     
+    const red = Color('#76272a');
+    const green = Color('#1e612f');
+
     const handleClose = () => setShow(false);
     
     const handleShow = (person) => {
@@ -28,7 +33,7 @@ const RowComponent = props => {
     
     return (
         <>
-        <tr key = {props.person.id} style = {{backgroundColor: color === null ?  null : (color ? 'green': 'red')}}
+        <tr key = {props.person.id} style = {{backgroundColor: color === null ?  null : (color ? green : red )}}
         >
             <td> {props.person.ticket} </td>
             <td> {props.person.countyId} </td>
@@ -48,7 +53,6 @@ const RowComponent = props => {
                         } else if (color) {
                             setColor(false);
                         }
-                        console.log(props.person.checked);
                         PersonService.checkInPerson(props.person);
                     }}
                     >{props.person.checked ? "Check out" : "Check in"}</Button>

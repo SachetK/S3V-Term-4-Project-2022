@@ -10,28 +10,7 @@ const ListPersonComponent = () => {
     const [logs, setLogs] = useState([]);
     
     const [people, setPeople] = useState([]);
-    const [modalData, setModalData] = useState({});
-    const [counterpartData, setCounterpartData] = useState({});
-    const [isGuest, setIsGuest] = useState(false);    
-    const [show, setShow] = useState(false);
-    
-    const handleClose = () => setShow(false);
-    
-    const handleShow = (person) => {
-        setModalData(person);
-        
-        setIsGuest(people.find(o => o.guestTicket === person.ticket) != null ? true : false);
-        
-        if(person.guest === 'Y'){
-            setCounterpartData(people.find(o => o.ticket === person.guestTicket));
-        } else if (isGuest) {
-            setCounterpartData(people.find(o => o.guestTicket === person.ticket));
-        }
-
-        setShow(true);        
-    };
-
-
+ 
     //Clear Database
     const [clearDatabase, setClearDatabase] = useState(false);
     const [importModal, setImportModal] = useState(false);
@@ -172,7 +151,7 @@ const ListPersonComponent = () => {
                                             PersonService.uploadPeople(formData).then((res) => {
                                                 setImportModal(false);
                                                 alert(res.data.message);
-                                            }).catch((err) => {
+                                            }).catch(() => {
                                                 setImportModal(false);
                                                 alert("Failed to upload!");
                                             })

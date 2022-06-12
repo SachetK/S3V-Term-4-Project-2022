@@ -1,5 +1,0 @@
-com\S3V\Event\Check\In\Tracker\model\Person.class
-com\S3V\Event\Check\In\Tracker\controller\PersonController.class
-com\S3V\Event\Check\In\Tracker\repository\PersonRepository.class
-com\S3V\Event\Check\In\Tracker\exception\ResourceNotFoundException.class
-com\S3V\Event\Check\In\Tracker\EventCheckInTrackerApplication.class
