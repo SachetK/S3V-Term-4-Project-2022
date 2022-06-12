@@ -44,11 +44,7 @@ const HelpComponent = () => {
                                 </Tab.Pane>
                                 <Tab.Pane eventKey = "Upload-Data">
                                     <h1 >Uploading Data</h1>
-<<<<<<< HEAD
-                                    <p>To upload the student data file, navigate to the "Students List" page and click on "Import". Then, click on "Choose file" to select which file (.csv) to upload, and submit.</p>
-=======
                                     <p>To upload the student data file, navigate to the "Students List" page and click on "Upload". Then, click on "Choose file" to select a file (.csv) and upload.</p>
->>>>>>> production
                                     <p> The uploaded file MUST be in the following format: </p>
                                     <table className ="table">
                                         <thead>
@@ -86,31 +82,18 @@ const HelpComponent = () => {
                                 </Tab.Pane>
                                 <Tab.Pane eventKey = "Student-Search">
                                     <h1>Searching a Student</h1>
-<<<<<<< HEAD
-                                    <p>To search a student, first navigate to the "Students List" page. Then, enter the student's ID, first/last name, or scan the barcode on their ID card. The same search bar will be used for all types of entires. Matching results will replace the original student list. Under the "Actions" column, there is a button labeled "More Info". Clicking on this button will create a popup that will isolate the student's information and also display the information of any students that are associated with them. Clicking on "Logs" at the bottom of the popup will enable you to see the actions that have been taken and their timestamps. To exit out of the popup and return to the live display, click "Cancel".</p>
-=======
                                     <p>To search a student, first navigate to the "Students List" page. Then, enter the student's ID, first/last name, or scan the barcode on their ID card. The same search bar will be used for all types of entries. Matching results will replace the original student list. Under the "Actions" column, there is a button labeled "More Info". Clicking on this button will create a popup that will isolate the student's information and also display the information of any students that are associated with them. Clicking on "Logs" at the bottom of the popup will enable you to see the actions that have been taken and their timestamps. To exit out of the popup and return to the live display, click "Cancel".</p>
->>>>>>> production
                                     <h2>Enter Student ID</h2>
                                     <p>Enter the student's ID into the search bar and hit enter on your keyboard.</p>
                                     
                                     <h2>Search by First or Last Name</h2>
-<<<<<<< HEAD
-                                    <p>Enter the first/last name in the search bar and hit enter on your keyboard. The application allows for some case unsensitivitiy by allowing the first letter of a search to be uncapitalized. Otherwise, type it as it would appear on the student's school records (i.e. correct capitalization, symbols such as hyphens, etc.). The search will also allow for searches of the beginning parts of the student's name.</p>
-
-=======
                                     <p>Enter the first/last name in the search bar and hit enter on your keyboard. The application allows for some case unsensitivitiy by allowing the first letter of a search to be uncapitalized. Otherwise, type it as it would appear on the student's school records (i.e. correct capitalization, symbols such as hyphens, etc.). The search will also allow for searches of the beginning parts of a student's name.</p>
                                     
->>>>>>> production
                                     <h2>Search by Ticket Number</h2>
                                     <p>Enter the ticket number in the search bar and hit enter on your keyboard.</p>
 
                                     <h2>Scan Student ID Card</h2>
-<<<<<<< HEAD
-                                    <p>This function uses an external barcode scanner. Scanning a barcode will auto-fill in the search bar with the corresponding Student ID.</p>
-=======
                                     <p>This function uses an external barcode scanner. Scanning a barcode will auto-fill in the search bar with the corresponding student ID.</p>
->>>>>>> production
                                 </Tab.Pane>
                                 <Tab.Pane eventKey = "Updating-Status">
                                     <h1>Updating Status</h1>
@@ -124,11 +107,7 @@ const HelpComponent = () => {
                                 </Tab.Pane>
                                 <Tab.Pane eventKey = "Viewing-Students">
                                     <h1>Viewing Students and Exporting Data</h1>
-<<<<<<< HEAD
-                                    <p>The "Students List" page displays all of the student data in a table sorted by ticket number.</p>
-=======
                                     <p>The "Students List" page displays all of the student data in a table sorted by ticket number. Click on the "More Info" button under the "Actions" column to isolate a particular student's information.</p>
->>>>>>> production
 
                                     <h2>Exporting Ticket Data</h2>
                                     <p>To export data, you will first need to navigate to the "Students List" page. Then, click on the "Export" button to download all the data (as a .csv file).</p>
