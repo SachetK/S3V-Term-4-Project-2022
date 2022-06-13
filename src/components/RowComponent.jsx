@@ -1,10 +1,10 @@
 import Color from 'color';
-import { React, useEffect, useState } from 'react';
+import { React, useState } from 'react';
 import { Button, ButtonGroup, Modal } from "react-bootstrap";
 import PersonService from '../services/PersonService';
+import LogService from '../services/LogService';
 
 const RowComponent = props => {
-
     // more info for students 
     const [modalData, setModalData] = useState({});
     const [counterpartData, setCounterpartData] = useState({});
@@ -54,6 +54,10 @@ const RowComponent = props => {
                             setColor(false);
                         }
                         PersonService.checkInPerson(props.person);
+                        LogService.addLog({
+                            logger: "John",
+                            message: "Checked " + (props.person.checked ? "in " : "out ") + props.person.firstName + " " + props.person.lastName + " at " + new Date()
+                          });
                     }}
                     >{props.person.checked ? "Check out" : "Check in"}</Button>
                 </ButtonGroup>

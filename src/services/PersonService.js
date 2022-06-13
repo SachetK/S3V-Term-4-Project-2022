@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const PERSON_API_BASE_URL = "https://event-check-in-backend.herokuapp.com/api/v1"
+const PERSON_API_BASE_URL = "https://event-check-in-backend.herokuapp.com/api/v1/people"
 
 class PersonService {
     getPeople(){
-        return axios.get(PERSON_API_BASE_URL + "/people");
+        return axios.get(PERSON_API_BASE_URL);
     }
 
     deletePeople() {
-        return axios.delete(PERSON_API_BASE_URL + "/people");
+        return axios.delete(PERSON_API_BASE_URL);
     }
 
     uploadPeople(file) {
@@ -16,7 +16,7 @@ class PersonService {
     }
 
     checkInPerson(person) {
-        return axios.put(PERSON_API_BASE_URL + "/people/" + person.id);
+        return axios.put(PERSON_API_BASE_URL + person.id);
     }
 }
 
