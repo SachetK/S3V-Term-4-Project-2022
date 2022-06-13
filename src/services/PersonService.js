@@ -16,7 +16,7 @@ class PersonService {
     }
 
     checkInPerson(person) {
-        return axios.put(PERSON_API_BASE_URL + person.id);
+        return axios.put(PERSON_API_BASE_URL + "/" + person.id);
     }
 }
 
