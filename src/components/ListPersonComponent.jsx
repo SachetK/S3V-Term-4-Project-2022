@@ -4,18 +4,17 @@ import '../App.css';
 
 import { Table, Button, ButtonGroup, ButtonToolbar, Modal, Form, InputGroup } from "react-bootstrap";
 import RowComponent from './RowComponent';
+import LogService from '../services/LogService';
 
-const ListPersonComponent = () => {  
+const ListPersonComponent = () => {     
     //Database structure
     const [logs, setLogs] = useState([]);
-    
     const [people, setPeople] = useState([]);
  
     //Clear Database
     const [clearDatabase, setClearDatabase] = useState(false);
     const [importModal, setImportModal] = useState(false);
     const [showExport, setShowExport] = useState(false);
-
 
     // searching
     const [searchTerm, setTerm] = useState('');
@@ -37,6 +36,14 @@ const ListPersonComponent = () => {
             }
         )
     }, [people]);
+
+    useEffect(() => {
+        LogService.getLogs().then(
+            (res) => {
+                setLogs(res.data);
+            }
+        )
+    }, [logs]);
 
     const closeDelete = () => {
         setClearDatabase(false);
@@ -91,7 +98,8 @@ const ListPersonComponent = () => {
                             <Button variant = "danger"
                                 onClick = {
                                     () => PersonService.deletePeople()
-                                    .then(() => closeDelete())
+                                    .then(() => LogService.deleteLogs()
+                                        .then(() => closeDelete()))
                                 }
                             > Clear Database </Button>
                             
@@ -112,7 +120,7 @@ const ListPersonComponent = () => {
                         <Modal.Body>
                             {
                                 logs.map(log =>
-                                    <p> {log} </p>    
+                                    <p> <b>{log.logger}</b>: {log.message} </p>    
                                 )
                             }
                         </Modal.Body>

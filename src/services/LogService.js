@@ -10,6 +10,10 @@ class LogService {
     addLog(log) {
         return axios.post(PERSON_API_LOGS_BASE_URL, log);
     }
+    
+    deleteLogs() {
+        return axios.delete(PERSON_API_LOGS_BASE_URL);
+    }
 }
 
 export default new LogService();
