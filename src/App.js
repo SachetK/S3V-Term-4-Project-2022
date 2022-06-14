@@ -6,7 +6,7 @@ import HeaderComponent from './components/HeaderComponent';
 import HelpComponent from './components/HelpComponent';
 import { Container } from 'react-bootstrap';
 import ProtectedRoute from './auth/protected-route';
-import ListPersonComponent from './components/ListPersonComponent';
+import ListPersonComponent from './components/studentsList/ListPersonComponent';
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
             <Route exact path = "/" component = {HomeComponent}></Route>
             <Route path = "/login" component = {HomeComponent}></Route>
             <ProtectedRoute path = "/students" component = {ListPersonComponent}></ProtectedRoute>
+            <ProtectedRoute path = "/logs" component = {HelpComponent}></ProtectedRoute>
             <Route path = "/help" component = {HelpComponent}></Route>
             <HomeComponent />
           </Switch>

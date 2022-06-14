@@ -1,8 +1,8 @@
 import Color from 'color';
 import { React, useState, useEffect } from 'react';
 import { Button, ButtonGroup, Modal } from "react-bootstrap";
-import PersonService from '../services/PersonService';
-import LogService from '../services/LogService';
+import LogService from '../../services/LogService';
+import PersonService from '../../services/PersonService';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const RowComponent = props => {
@@ -60,7 +60,7 @@ const RowComponent = props => {
                             PersonService.checkInPerson(props.person);
                             LogService.addLog({
                                 logger: name,
-                                message: "Checked " + (props.person.checked ? "in " : "out ") + props.person.firstName + " " + props.person.lastName + " at " + new Date()
+                                message: "Checked " + (props.person.checked ? "out " : "in ") + props.person.firstName + " " + props.person.lastName + " at " + new Date()
                             });
                         }}
                         >{props.person.checked ? "Check out" : "Check in"}</Button>
@@ -138,7 +138,7 @@ const RowComponent = props => {
                                                 PersonService.checkInPerson(counterpartData);
                                                 LogService.addLog({
                                                     logger: name,
-                                                    message: "Checked " + (counterpartData.checked ? "in " : "out ") + counterpartData.firstName + " " + counterpartData.lastName + " at " + new Date()
+                                                    message: "Checked " + (counterpartData.checked ? "out  " : "in ") + counterpartData.firstName + " " + counterpartData.lastName + " at " + new Date()
                                                 });
                                             }}
                                             >
@@ -151,7 +151,6 @@ const RowComponent = props => {
                         </table>
                     </>
                 }
-                    <h3><a href=''>Logs</a></h3>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>

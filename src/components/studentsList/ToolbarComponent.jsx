@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, ButtonGroup, ButtonToolbar, Form, InputGroup, Modal } from 'react-bootstrap';
-import LogService from '../services/LogService';
-import PersonService from '../services/PersonService';
+import LogService from '../../services/LogService';
+import PersonService from '../../services/PersonService';
 
 const ToolbarComponent = (props) => {
     //Clear Database
@@ -9,8 +9,6 @@ const ToolbarComponent = (props) => {
     const [importModal, setImportModal] = useState(false);
     const [showExport, setShowExport] = useState(false);
 
-    // searching
-    
     //import
     const [file, setFile] = useState(null);
     
@@ -40,7 +38,8 @@ const ToolbarComponent = (props) => {
                             }}
                         />
                         <Button variant="outline-light" onClick={() => setImportModal(true)}>Upload</Button>{' '}
-                        <Button variant="outline-light" onClick={() => setShowExport(true)}>Export</Button>    
+                        <Button variant="outline-light" onClick={() => setShowExport(true)}>Export</Button>
+                        <Button href = "/logs" variant="outline-light">View Logs</Button> 
                     </InputGroup>
                     
                     <ButtonGroup aria-label="First group">                       
@@ -138,14 +137,18 @@ const ToolbarComponent = (props) => {
                                     () => {
                                         const formData = new FormData();
                                         formData.append('file' , file);
-                                        LogService.downloadLogs()
-                                        .then((res) => {
-                                            const url = window.URL.createObjectURL(new Blob([res.data]));
-                                            const link = document.createElement('a');
-                                            link.href = url;
-                                            link.setAttribute('download', 'logs.csv'); //or any other extension
-                                            document.body.appendChild(link);
-                                            link.click();
+                                        if (props.logs.length !== 0) {
+                                            LogService.downloadLogs()
+                                            .then((res) => {
+                                                const url = window.URL.createObjectURL(new Blob([res.data]));
+                                                const link = document.createElement('a');
+                                                link.href = url;
+                                                link.setAttribute('download', 'logs.csv'); //or any other extension
+                                                document.body.appendChild(link);
+                                                link.click();
+                                            })
+                                        }
+                                        if(file != null) {
                                             PersonService.deletePeople().then(
                                                 PersonService.uploadPeople(formData).then((res) => {
                                                     setImportModal(false);
@@ -154,8 +157,8 @@ const ToolbarComponent = (props) => {
                                                     setImportModal(false);
                                                     alert("Failed to upload!");
                                                 })
-                                            )
-                                        })  
+                                            )  
+                                        }
                                     }
                                 }
                             > Upload </Button>

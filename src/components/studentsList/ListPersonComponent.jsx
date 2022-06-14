@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import PersonService from '../services/PersonService';
-import '../App.css';
+import PersonService from '../../services/PersonService';
+import '../../App.css';
 
 import { Table } from "react-bootstrap";
 import RowComponent from './RowComponent';
-import LogService from '../services/LogService';
+import LogService from '../../services/LogService';
 import ToolbarComponent from './ToolbarComponent';
 
 const ListPersonComponent = () => {     
@@ -12,7 +12,6 @@ const ListPersonComponent = () => {
     const [logs, setLogs] = useState([]);
     const [people, setPeople] = useState([]);   
     const [searchTerm, setTerm] = useState('');
-
 
     //update people whenever changes
     useEffect(() => {
@@ -30,6 +29,7 @@ const ListPersonComponent = () => {
             }
         )
     }, [logs]);
+    
     return (
         <div>
             <h2 className = "text-center" style={{ color: "white" }}> Student List </h2>
