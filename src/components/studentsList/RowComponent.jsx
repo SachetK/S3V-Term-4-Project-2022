@@ -10,7 +10,6 @@ const RowComponent = props => {
     const { name } = user;
 
     // more info for students 
-    const [modalData, setModalData] = useState({});
     const [counterpartData, setCounterpartData] = useState({});
     const [isGuest, setIsGuest] = useState(false);    
     const [show, setShow] = useState(false);
@@ -25,9 +24,7 @@ const RowComponent = props => {
         setColor(props.person.checked);
     }, [props.person])
 
-    const handleShow = (person) => {
-        setModalData(person);
-        
+    const handleShow = (person) => {        
         setIsGuest(props.people.find(o => o.guestTicket === person.ticket) != null ? true : false);
         
         if(person.guest === 'Y'){
@@ -74,7 +71,7 @@ const RowComponent = props => {
                 onHide={handleClose}
             >
             <Modal.Header>
-                <Modal.Title>More Info on {modalData.firstName + " " + modalData.lastName}</Modal.Title>
+                <Modal.Title>More Info on {props.person.firstName + " " + props.person.lastName}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <h3>{ !isGuest ? "Student: " : "Guest: " }</h3>
@@ -94,19 +91,19 @@ const RowComponent = props => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td> {modalData.ticket} </td>
-                                <td> {modalData.countyId} </td>
-                                <td> {modalData.lastName} </td>
-                                <td> {modalData.middleInitial} </td>
-                                <td> {modalData.firstName} </td>
-                                <td> {modalData.grade} </td>
-                                <td> {modalData.paymentMethod} </td>
-                                <td> {modalData.guest} </td>
-                                <td> {modalData.guestTicket} </td>
+                                <td> {props.person.ticket} </td>
+                                <td> {props.person.countyId} </td>
+                                <td> {props.person.lastName} </td>
+                                <td> {props.person.middleInitial} </td>
+                                <td> {props.person.firstName} </td>
+                                <td> {props.person.grade} </td>
+                                <td> {props.person.paymentMethod} </td>
+                                <td> {props.person.guest} </td>
+                                <td> {props.person.guestTicket} </td>
                             </tr>
                         </tbody>
                     </table>
-                { (modalData.guest === 'Y' || isGuest) &&
+                { (props.person.guest === 'Y' || isGuest) &&
                     <>
                         <h3>{ isGuest ? "Student: " : "Guest: " } </h3>
                         <table className="table">
@@ -120,7 +117,7 @@ const RowComponent = props => {
                                     <th>GR</th>
                                     <th>Payment Method</th>
                                     <th>Guest Y/N</th>
-                                    <th>{isGuest ? "Guest Ticket Number" : "Check In"}</th>
+                                    <th>Check In</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -133,7 +130,7 @@ const RowComponent = props => {
                                     <td> {counterpartData.grade} </td>
                                     <td> {counterpartData.paymentMethod} </td>
                                     <td> {counterpartData.guest} </td>
-                                    <td> {isGuest ? counterpartData.guestTicket : 
+                                    <td> 
                                             <Button variant = "dark" onClick = {() => {
                                                 PersonService.checkInPerson(counterpartData);
                                                 LogService.addLog({
@@ -144,7 +141,6 @@ const RowComponent = props => {
                                             >
                                                 {counterpartData.checked ? "Check out" : "Check in"}
                                             </Button>
-                                        } 
                                     </td>
                                 </tr>
                             </tbody>

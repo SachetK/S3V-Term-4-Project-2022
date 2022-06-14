@@ -7,7 +7,6 @@ const ToolbarComponent = (props) => {
     //Clear Database
     const [clearDatabase, setClearDatabase] = useState(false);
     const [importModal, setImportModal] = useState(false);
-    const [showExport, setShowExport] = useState(false);
 
     //import
     const [file, setFile] = useState(null);
@@ -38,7 +37,15 @@ const ToolbarComponent = (props) => {
                             }}
                         />
                         <Button variant="outline-light" onClick={() => setImportModal(true)}>Upload</Button>{' '}
-                        <Button variant="outline-light" onClick={() => setShowExport(true)}>Export</Button>
+                        <Button variant="outline-light" onClick={() => LogService.downloadLogs()
+                                .then((res) => {
+                                    const url = window.URL.createObjectURL(new Blob([res.data]));
+                                    const link = document.createElement('a');
+                                    link.href = url;
+                                    link.setAttribute('download', 'logs.csv'); //or any other extension
+                                    document.body.appendChild(link);
+                                    link.click();
+                            })}>Export</Button>
                         <Button href = "/logs" variant="outline-light">View Logs</Button> 
                     </InputGroup>
                     
@@ -75,39 +82,6 @@ const ToolbarComponent = (props) => {
                                 }
                             > Clear Database </Button>
                             
-                        </Modal.Footer>
-                    </Modal>
-                    
-                    <Modal
-                        size="lg"
-                        show = {showExport}
-                        onHide = {() => setShowExport(false)}
-                        centered
-                    >
-                        <Modal.Header>
-                            <Modal.Title id="contained-modal-title-vcenter">
-                                Export Logs
-                            </Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            {
-                                props.logs.map(log =>
-                                    <p> <b>{log.logger}</b>: {log.message} </p>    
-                                )
-                            }
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button onClick={
-                                () => LogService.downloadLogs()
-                                .then((res) => {
-                                    const url = window.URL.createObjectURL(new Blob([res.data]));
-                                    const link = document.createElement('a');
-                                    link.href = url;
-                                    link.setAttribute('download', 'logs.csv'); //or any other extension
-                                    document.body.appendChild(link);
-                                    link.click();
-                            })} variant = 'success'>Download</Button>
-                            <Button onClick={() => setShowExport(false)}>Close</Button>                           
                         </Modal.Footer>
                     </Modal>
 

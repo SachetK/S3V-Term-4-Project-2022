@@ -14,6 +14,11 @@ const ListLogsComponent = () => {
         )
     }, [logs]);
 
+    function inputFocus(){
+        document.getElementById("Search Bar").focus();
+    }
+    window.onkeydown = inputFocus;
+   
     return (
         <div>
             <h2 className = "text-center" style={{ color: "white" }}> Logs List </h2>
@@ -40,10 +45,8 @@ const ListLogsComponent = () => {
                             logs.filter((val) => {
                                 if (searchTerm == ""){
                                     return val;
-                                } else if (val.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                            val.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                                            val.ticket.toString().includes(searchTerm.toLowerCase()) || 
-                                            (val.countyId != null ? val.countyId.toString().includes(searchTerm.toLowerCase()) : false)) {
+                                } else if (val.logger.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                                            val.message.toLowerCase().includes(searchTerm.toLowerCase())) {
                                     return val;
                                 }
                             }).map(
