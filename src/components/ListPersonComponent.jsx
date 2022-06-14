@@ -165,15 +165,24 @@ const ListPersonComponent = () => {
                                     () => {
                                         const formData = new FormData();
                                         formData.append('file' , file);
-                                        PersonService.deletePeople().then(
-                                            PersonService.uploadPeople(formData).then((res) => {
-                                                setImportModal(false);
-                                                alert(res.data.message);
-                                            }).catch(() => {
-                                                setImportModal(false);
-                                                alert("Failed to upload!");
-                                            })
-                                        )
+                                        LogService.downloadLogs()
+                                        .then((res) => {
+                                            const url = window.URL.createObjectURL(new Blob([res.data]));
+                                            const link = document.createElement('a');
+                                            link.href = url;
+                                            link.setAttribute('download', 'logs.csv'); //or any other extension
+                                            document.body.appendChild(link);
+                                            link.click();
+                                            PersonService.deletePeople().then(
+                                                PersonService.uploadPeople(formData).then((res) => {
+                                                    setImportModal(false);
+                                                    alert(res.data.message);
+                                                }).catch(() => {
+                                                    setImportModal(false);
+                                                    alert("Failed to upload!");
+                                                })
+                                            )
+                                        })  
                                     }
                                 }
                             > Upload </Button>
