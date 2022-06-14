@@ -7,6 +7,10 @@ class PersonService {
         return axios.get(PERSON_API_BASE_URL);
     }
 
+    getPerson(studentId){
+        return axios.get(PERSON_API_BASE_URL + "/" + studentId);
+    }
+
     deletePeople() {
         return axios.delete(PERSON_API_BASE_URL);
     }

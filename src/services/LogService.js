@@ -14,6 +14,14 @@ class LogService {
     deleteLogs() {
         return axios.delete(PERSON_API_LOGS_BASE_URL);
     }
+
+    downloadLogs(){
+        return axios({
+            url: PERSON_API_LOGS_BASE_URL + "/download", 
+            method: 'GET',
+            responseType: 'blob'
+        })
+     }
 }
 
 export default new LogService();

@@ -125,6 +125,16 @@ const ListPersonComponent = () => {
                             }
                         </Modal.Body>
                         <Modal.Footer>
+                            <Button onClick={
+                                () => LogService.downloadLogs()
+                                .then((res) => {
+                                    const url = window.URL.createObjectURL(new Blob([res.data]));
+                                    const link = document.createElement('a');
+                                    link.href = url;
+                                    link.setAttribute('download', 'logs.csv'); //or any other extension
+                                    document.body.appendChild(link);
+                                    link.click();
+                            })} variant = 'success'>Download</Button>
                             <Button onClick={() => setShowExport(false)}>Close</Button>                           
                         </Modal.Footer>
                     </Modal>

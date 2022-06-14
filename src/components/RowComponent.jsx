@@ -1,5 +1,5 @@
 import Color from 'color';
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { Button, ButtonGroup, Modal } from "react-bootstrap";
 import PersonService from '../services/PersonService';
 import LogService from '../services/LogService';
@@ -21,6 +21,10 @@ const RowComponent = props => {
 
     const handleClose = () => setShow(false);
     
+    useEffect(() => {
+        setColor(props.person.checked);
+    }, [props.person])
+
     const handleShow = (person) => {
         setModalData(person);
         
@@ -37,7 +41,8 @@ const RowComponent = props => {
     
     return (
         <>
-            <tr key = {props.person.id} style = {{backgroundColor: color === null ?  null : (color ? green : red )}}
+            <tr key = {props.person.id}
+                style = {{backgroundColor: color === null ?  null : (color ? green : red )}}
             >
                 <td> {props.person.ticket} </td>
                 <td> {props.person.countyId} </td>
@@ -52,11 +57,6 @@ const RowComponent = props => {
                     <ButtonGroup role = "group" size = 'sm' >
                         <Button variant = "dark" onClick = {() => handleShow(props.person) }>More Info</Button>
                         <Button variant = "dark" onClick = {() => {
-                            if(color === null || !color){
-                                setColor(true);
-                            } else if (color) {
-                                setColor(false);
-                            }
                             PersonService.checkInPerson(props.person);
                             LogService.addLog({
                                 logger: name,
@@ -67,6 +67,7 @@ const RowComponent = props => {
                     </ButtonGroup>
                 </td>
             </tr>
+            
             <Modal
                 size="lg"
                 show={show} 
@@ -87,7 +88,7 @@ const RowComponent = props => {
                                 <th>FIRST</th>
                                 <th>GR</th>
                                 <th>Payment Method</th>
-                                <th>Guest YN</th>
+                                <th>Guest Y/N</th>
                                 <th>Guest Ticket Number</th>
                             </tr>
                         </thead>
@@ -118,21 +119,33 @@ const RowComponent = props => {
                                     <th>FIRST</th>
                                     <th>GR</th>
                                     <th>Payment Method</th>
-                                    <th>Guest YN</th>
-                                    <th>Guest Ticket Number</th>
+                                    <th>Guest Y/N</th>
+                                    <th>{isGuest ? "Guest Ticket Number" : "Check In"}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                <td> {counterpartData.ticket} </td>
-                                <td> {counterpartData.countyId} </td>
-                                <td> {counterpartData.lastName} </td>
-                                <td> {counterpartData.middleInitial} </td>
-                                <td> {counterpartData.firstName} </td>
-                                <td> {counterpartData.grade} </td>
-                                <td> {counterpartData.paymentMethod} </td>
-                                <td> {counterpartData.guest} </td>
-                                <td> {counterpartData.guestTicket} </td>
+                                    <td> {counterpartData.ticket} </td>
+                                    <td> {counterpartData.countyId} </td>
+                                    <td> {counterpartData.lastName} </td>
+                                    <td> {counterpartData.middleInitial} </td>
+                                    <td> {counterpartData.firstName} </td>
+                                    <td> {counterpartData.grade} </td>
+                                    <td> {counterpartData.paymentMethod} </td>
+                                    <td> {counterpartData.guest} </td>
+                                    <td> {isGuest ? counterpartData.guestTicket : 
+                                            <Button variant = "dark" onClick = {() => {
+                                                PersonService.checkInPerson(counterpartData);
+                                                LogService.addLog({
+                                                    logger: name,
+                                                    message: "Checked " + (counterpartData.checked ? "in " : "out ") + counterpartData.firstName + " " + counterpartData.lastName + " at " + new Date()
+                                                });
+                                            }}
+                                            >
+                                                {counterpartData.checked ? "Check out" : "Check in"}
+                                            </Button>
+                                        } 
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
