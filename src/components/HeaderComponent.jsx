@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AuthenticationButton from './AuthenticationButton';
+import AuthenticationButton from './AuthenticationButton.jsx';
 
 class HeaderComponent extends Component {
     render() {

@@ -5,7 +5,7 @@ import HomeComponent from './components/HomeComponent';
 import HeaderComponent from './components/HeaderComponent';
 import HelpComponent from './components/HelpComponent';
 import { Container } from 'react-bootstrap';
-import ProtectedRoute from './auth/protected-route';
+import ProtectedRoute from './auth/protected-route.jsx';
 import ListPersonComponent from './components/studentsList/ListPersonComponent';
 import ListLogsComponent from './components/logsList/ListLogsComponent';
 
