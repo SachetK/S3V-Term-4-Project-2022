@@ -5,24 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="504dc488-5aaa-4746-b247-a33891abcf1a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/vite.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/logo512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/auth0-provider-with-history.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/auth0-provider-with-history.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/protected-route.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/protected-route.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/auth/useRedirectToHTTPS.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/auth/useRedirectToHTTPS.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AuthenticationButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthenticationButton.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HeaderComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeaderComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LoginButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginButton.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LogoutButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LogoutButton.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static.json" beforeDir="false" afterPath="$PROJECT_DIR$/static.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +70,7 @@
       <option name="presentableId" value="Default" />
       <updated>1654489431931</updated>
       <workItem from="1664836649244" duration="4990000" />
-      <workItem from="1664848198691" duration="1704000" />
+      <workItem from="1664848198691" duration="2538000" />
     </task>
     <servers />
   </component>
