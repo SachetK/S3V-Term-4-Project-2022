@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomeComponent from './components/HomeComponent';
 import HeaderComponent from './components/HeaderComponent';
 import HelpComponent from './components/HelpComponent';
@@ -11,19 +11,18 @@ import ListLogsComponent from './components/logsList/ListLogsComponent';
 
 function App() {
   return (
-    <Router>
+      <>
         <HeaderComponent />
         <Container>
-          <Switch>
-            <Route exact path = "/" component = {HomeComponent}></Route>
-            <Route path = "/login" component = {HomeComponent}></Route>
-            <ProtectedRoute path = "/students" component = {ListPersonComponent}></ProtectedRoute>
-            <ProtectedRoute path = "/logs" component = {ListLogsComponent}></ProtectedRoute>
-            <Route path = "/help" component = {HelpComponent}></Route>
-            <HomeComponent />
-          </Switch>
+          <Routes>
+            <Route path = "/" element = {<HomeComponent />}></Route>
+            <Route path = "/login" element = {<HomeComponent />}></Route>
+            <Route path = "/students" element = {<ProtectedRoute component = {ListPersonComponent} />}></Route>
+            <Route path = "/logs" element = {<ProtectedRoute component = {ListLogsComponent} />}></Route>
+            <Route path = "/help" element = {<HelpComponent />}></Route>
+          </Routes>
         </Container>
-    </Router>
+    </>
   );
 }
 
